@@ -7,7 +7,7 @@ namespace ExpClinicoApi.Models.Global
 {
     public class GlTipoPiel
     {
-        public int idTipoPiel { get; set; }
+        public int id { get; set; }
         public string tipo { get; set; }
     }
 }

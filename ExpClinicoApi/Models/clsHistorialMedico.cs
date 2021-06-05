@@ -8,6 +8,7 @@ namespace ExpClinicoApi.Models
 {
     public class clsHistorialMedico
     {
+        public int id { get; set; }
         public GlMedicoGrl medicoGrl { get; set; }
         public string dentistaFamilia { get; set; }
         public DateTime ultimaVacuna { get; set; }

@@ -7,7 +7,7 @@ namespace ExpClinicoApi.Models.Global
 {
     public class GlHospital
     {
-        public int idHospital { get; set; }
+        public int id { get; set; }
         public string nombre { get; set; }
         public string direccion { get; set; }
     }

@@ -40,13 +40,14 @@ namespace ExpClinicoApi
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfiguration(new AlbumMapping());
 
-            modelBuilder.Entity<clsDetalleSolicitudExamen>().HasKey(x => new { x.idclsSolicitudExamen, x.idclsExamen });
+            modelBuilder.Entity<clsDetalleSolicitudExamen>().HasKey(x => new {x.clsSolicitudExamenId, x.clsExamenId });
+            
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseMySQL("server=localhost;user=root;database=clinica;port=3306;password='';");
+                optionsBuilder.UseMySQL("server=localhost;user=root;database=prueba;port=3306;password='';");
             }
         }
     }

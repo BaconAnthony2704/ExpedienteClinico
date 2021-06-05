@@ -7,7 +7,7 @@ namespace ExpClinicoApi.Models
 {
     public class clsIncapacidad
     {
-        public int idTipoIncapacidad { get; set; }
+        public int id { get; set; }
         public bool estado { get; set; }
         public bool tipo { get; set; }
         public string nombre { get; set; }

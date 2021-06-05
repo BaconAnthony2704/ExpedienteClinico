@@ -8,7 +8,7 @@ namespace ExpClinicoApi.Models
 {
     public class clsInformacionAdicional
     {
-        public int idInformacionAdicional { get; set; }
+        public int id { get; set; }
         public string lugarNacimiento { get; set; }
         public string telefonoDomicilio { get; set; }
         public string telefonoOficina { get; set; }

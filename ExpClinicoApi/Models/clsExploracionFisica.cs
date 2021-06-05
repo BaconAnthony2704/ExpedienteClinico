@@ -8,6 +8,7 @@ namespace ExpClinicoApi.Models
 {
     public class clsExploracionFisica
     {
+        public int id { get; set; }
         public double altura { get; set; }
         public double peso { get; set; }
         public GlTipoPiel tipoPiel { get; set; }

@@ -7,7 +7,7 @@ namespace ExpClinicoApi.Models
 {
     public class clsAlergia
     {
-        public int idAlergia { get; set; }
+        public int id { get; set; }
         public bool estado { get; set; }
         public string nombre { get; set; }
     }

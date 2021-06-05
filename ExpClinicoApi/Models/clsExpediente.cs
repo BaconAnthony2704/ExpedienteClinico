@@ -7,7 +7,7 @@ namespace ExpClinicoApi.Models
 {
     public class clsExpediente
     {
-        public int idExpediente { get; set; }
+        public int id { get; set; }
         public int? idInformacionPersonal { get; set; }
         public int? idInformacionAdicional { get; set; }
         public int? idExploracionFisica { get; set; }
