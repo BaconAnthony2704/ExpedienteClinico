@@ -12,6 +12,18 @@ namespace ExpClinicoApi
     {
         
         public DbSet<Album> Albunes { get; set; }
+
+        public DbSet<Models.Global.GlMedicoGrl> Medicos { get; set; }
+        public DbSet<clsSolicitudExamen> solicitudExamens { get; set; }
+        public DbSet<clsDetalleSolicitudExamen> DetalleSolicitudExamens { get; set; }
+        public DbSet<clsExamen> Examens { get; set; }
+        public DbSet<clsExpediente> Expedientes { get; set; }
+
+
+
+
+        
+
         public string ConnectionString { get; set; }
         public DbContextSystem()
         {
@@ -27,6 +39,8 @@ namespace ExpClinicoApi
             
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfiguration(new AlbumMapping());
+
+            modelBuilder.Entity<clsDetalleSolicitudExamen>().HasKey(x => new { x.idclsSolicitudExamen, x.idclsExamen });
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

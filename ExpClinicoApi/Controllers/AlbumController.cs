@@ -22,12 +22,15 @@ namespace ExpClinicoApi.Controllers
         [HttpGet("[action]")]
         public async Task<IEnumerable<Album>> Listar()
         {
+            
+           
             var album = await _context.Albunes.ToListAsync();
             return album.Select(a=> new Album {
                 Name=a.Name,
                 Genre=a.Genre,
                 ArtistaName=a.ArtistaName,
                 Price=a.Price
+                
             });
         }
         //[HttpPost("[action]")]
