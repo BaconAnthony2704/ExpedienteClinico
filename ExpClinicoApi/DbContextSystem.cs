@@ -11,8 +11,7 @@ namespace ExpClinicoApi
     public class DbContextSystem:DbContext
     {
         
-        public DbSet<Album> Albunes { get; set; }
-
+        
         public DbSet<Models.Global.GlMedicoGrl> Medicos { get; set; }
         public DbSet<clsSolicitudExamen> solicitudExamens { get; set; }
         public DbSet<clsDetalleSolicitudExamen> DetalleSolicitudExamens { get; set; }
@@ -37,9 +36,7 @@ namespace ExpClinicoApi
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             
-            base.OnModelCreating(modelBuilder);
-            modelBuilder.ApplyConfiguration(new AlbumMapping());
-
+            
             modelBuilder.Entity<clsDetalleSolicitudExamen>().HasKey(x => new {x.clsSolicitudExamenId, x.clsExamenId });
             
         }
