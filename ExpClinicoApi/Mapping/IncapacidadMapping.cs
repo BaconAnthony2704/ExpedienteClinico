@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace ExpClinicoApi.Mapping
 {
-    public class AlbumMapping : Microsoft.EntityFrameworkCore.IEntityTypeConfiguration<Album>
+    public class IncapacidadMapping : IEntityTypeConfiguration<clsIncapacidad>
     {
-        public void Configure(EntityTypeBuilder<Album> builder)
+        public void Configure(EntityTypeBuilder<clsIncapacidad> builder)
         {
-            builder.ToTable("album").HasKey(a => a.Id);
+            builder.ToTable("tblincapacidad").HasKey(c => c.idTipoIncapacidad);
         }
     }
 }

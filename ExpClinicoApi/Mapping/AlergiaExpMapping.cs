@@ -8,11 +8,12 @@ using System.Threading.Tasks;
 
 namespace ExpClinicoApi.Mapping
 {
-    public class AlbumMapping : Microsoft.EntityFrameworkCore.IEntityTypeConfiguration<Album>
+    public class AlergiaExpMapping : IEntityTypeConfiguration<pivoteAlergiaExp>
     {
-        public void Configure(EntityTypeBuilder<Album> builder)
+        public void Configure(EntityTypeBuilder<pivoteAlergiaExp> builder)
         {
-            builder.ToTable("album").HasKey(a => a.Id);
+            builder.ToTable("tblalergia_expediente").HasKey(e => e.idAlergia);
         }
+
     }
 }

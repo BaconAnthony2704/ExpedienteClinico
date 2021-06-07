@@ -1,4 +1,4 @@
-﻿using ExpClinicoApi.Models;
+﻿using ExpClinicoApi.Models.Global;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace ExpClinicoApi.Mapping
 {
-    public class AlbumMapping : Microsoft.EntityFrameworkCore.IEntityTypeConfiguration<Album>
+    public class TipoPielMapping : IEntityTypeConfiguration<GlTipoPiel>
     {
-        public void Configure(EntityTypeBuilder<Album> builder)
+        public void Configure(EntityTypeBuilder<GlTipoPiel> builder)
         {
-            builder.ToTable("album").HasKey(a => a.Id);
+            builder.ToTable("gltipopiel").HasKey(e => e.idTipoPiel);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using ExpClinicoApi.Mapping;
 using ExpClinicoApi.Models;
+using ExpClinicoApi.Models.Global;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,19 @@ namespace ExpClinicoApi
     {
         
         public DbSet<Album> Albunes { get; set; }
+        public DbSet<clsExpediente> Expedientes { get; set; }
+        public DbSet<clsInformacionPersonal> InformacionPersonales { get; set; }
+        public DbSet<clsInformacionAdicional> InformacionAdicionales { get; set; }
+        public DbSet<clsHistorialMedico> HistorialMedicos { get; set; }
+        public DbSet<clsIncapacidad> Incapacidades { get; set; }
+        public DbSet<clsExploracionFisica> ExploracionesFisicas { get; set; }
+        public DbSet<clsAlergia> Alergias { get; set; }
+        public DbSet<pivoteAlergiaExp> pivoteAlergiaExps { get; set; }
+        public DbSet<pivoteIncapacidadExpediente> pivoteIncapacidadExpedientes { get; set; }
+
+        public DbSet<GlMedicoGrl> medicos  { get; set; }
+        public DbSet<GlComSeguro> seguros { get; set; }
+
         public string ConnectionString { get; set; }
         public DbContextSystem()
         {
@@ -27,6 +41,23 @@ namespace ExpClinicoApi
             
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfiguration(new AlbumMapping());
+            modelBuilder.ApplyConfiguration(new AlergiaExpMapping());
+            modelBuilder.ApplyConfiguration(new AlergiaMapping());
+            modelBuilder.ApplyConfiguration(new ColorCabelloMapping());
+            modelBuilder.ApplyConfiguration(new ConSeguroMapping());
+            modelBuilder.ApplyConfiguration(new EstadoCivilMapping());
+            modelBuilder.ApplyConfiguration(new ExpedienteMapping());
+            modelBuilder.ApplyConfiguration(new ExploracionFisicaMapping());
+            modelBuilder.ApplyConfiguration(new GeneroMapping());
+            modelBuilder.ApplyConfiguration(new HistorialMedicoMapping());
+            modelBuilder.ApplyConfiguration(new HistorialMedicoMapping());
+            modelBuilder.ApplyConfiguration(new HospitalMapping());
+            modelBuilder.ApplyConfiguration(new IncapacidadMapping());
+            modelBuilder.ApplyConfiguration(new IncapacidadExpMapping());
+            modelBuilder.ApplyConfiguration(new InformacionAdicionalMapping());
+            modelBuilder.ApplyConfiguration(new InformacionPersonalMapping());
+            modelBuilder.ApplyConfiguration(new MedicoGrlMapping());
+            modelBuilder.ApplyConfiguration(new TipoPielMapping());
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
