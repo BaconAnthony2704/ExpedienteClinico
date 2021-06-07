@@ -84,8 +84,19 @@ namespace ExpClinicoApi.Controllers
         [HttpPost]
         public async Task<ActionResult<Models.clsSolicitudExamen>> PostsolicitudExamen(Models.clsSolicitudExamen solicitudExamen)
         {
+            
             _context.solicitudExamens.Add(solicitudExamen);
             await _context.SaveChangesAsync();
+            foreach ( Models.clsDetalleSolicitudExamen sol in solicitudExamen.detalleExamenes)
+            {
+                var det = new Models.clsDetalleSolicitudExamen();
+                det.clsExamenId = sol.clsExamenId;
+                det.clsSolicitudExamenId = sol.clsSolicitudExamenId;
+                _context.DetalleSolicitudExamens.Add(det);
+                await _context.SaveChangesAsync();
+            };
+            
+            
 
             return CreatedAtAction("GetsolicitudExamen", new { id = solicitudExamen.id }, solicitudExamen);
         }

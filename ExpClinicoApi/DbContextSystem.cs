@@ -17,11 +17,12 @@ namespace ExpClinicoApi
         public DbSet<clsDetalleSolicitudExamen> DetalleSolicitudExamens { get; set; }
         public DbSet<clsExamen> Examens { get; set; }
         public DbSet<clsExpediente> Expedientes { get; set; }
+        public DbSet<ClsCita> citas { get; set; }
 
 
 
 
-        
+
 
         public string ConnectionString { get; set; }
         public DbContextSystem()
