@@ -24,26 +24,26 @@ namespace ExpClinicoApi.Controllers
         public async Task<ActionResult<List<Models.clsSolicitudExamen>>> Getsolicitudes()
         {
 
-            
+            var respuesta=await _context.solicitudExamens.ToListAsync();
             return await _context.solicitudExamens.ToListAsync();
         }
 
         // GET: api/solicitudExamen/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Models.clsSolicitudExamen>> GetsolicitudExamen(int id)
+        public async Task<ActionResult<List<Models.clsSolicitudExamen>>> GetsolicitudExamen(int id)
         {
             var solicitudExamen = await _context.solicitudExamens.FindAsync(id);
             
 
             
-            //var respuesta= await _context.solicitudExamens.Include(x => x.detalleExamenes).ToListAsync();
+           var respuesta= await _context.solicitudExamens.Include(x => x.detalleExamenes).ToListAsync();
 
             if (solicitudExamen == null)
             {
                 return NotFound();
             }
 
-            return await _context.solicitudExamens.Include(x => x.detalleExamenes).FirstOrDefaultAsync(m=> m.id==id); 
+            return await _context.solicitudExamens.Include(x => x.detalleExamenes).ToListAsync(); 
         }
 
         // PUT: api/solicitudExamen/5

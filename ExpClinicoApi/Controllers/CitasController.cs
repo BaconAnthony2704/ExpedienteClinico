@@ -19,7 +19,7 @@ namespace ExpClinicoApi.Controllers
             _context = context;
         }
 
-        // GET: api/ClsCitas
+        // GET: api/Citas
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Models.ClsCita>>> Getcitas()
         {

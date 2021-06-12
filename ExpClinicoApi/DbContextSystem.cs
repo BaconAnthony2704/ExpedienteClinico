@@ -18,8 +18,8 @@ namespace ExpClinicoApi
         public DbSet<clsExamen> Examens { get; set; }
         public DbSet<clsExpediente> Expedientes { get; set; }
         public DbSet<ClsCita> citas { get; set; }
-
-
+        public DbSet<Models.ClsDoctor> MedicosGeneral { get; set; }
+        public DbSet<Models.ClsPaciente> Pacientes { get; set; }
 
 
 

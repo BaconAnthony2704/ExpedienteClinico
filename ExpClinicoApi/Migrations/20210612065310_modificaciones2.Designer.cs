@@ -3,14 +3,16 @@ using System;
 using ExpClinicoApi;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ExpClinicoApi.Migrations
 {
     [DbContext(typeof(DbContextSystem))]
-    partial class DbContextSystemModelSnapshot : ModelSnapshot
+    [Migration("20210612065310_modificaciones2")]
+    partial class modificaciones2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

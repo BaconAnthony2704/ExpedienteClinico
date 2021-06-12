@@ -3,14 +3,16 @@ using System;
 using ExpClinicoApi;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ExpClinicoApi.Migrations
 {
     [DbContext(typeof(DbContextSystem))]
-    partial class DbContextSystemModelSnapshot : ModelSnapshot
+    [Migration("20210612062052_cita")]
+    partial class cita
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -32,34 +34,6 @@ namespace ExpClinicoApi.Migrations
                     b.HasKey("id");
 
                     b.ToTable("citas");
-                });
-
-            modelBuilder.Entity("ExpClinicoApi.Models.ClsDoctor", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<string>("nombreDoctor")
-                        .HasColumnType("text");
-
-                    b.HasKey("id");
-
-                    b.ToTable("MedicosGeneral");
-                });
-
-            modelBuilder.Entity("ExpClinicoApi.Models.ClsPaciente", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<string>("nombrePaciente")
-                        .HasColumnType("text");
-
-                    b.HasKey("id");
-
-                    b.ToTable("Pacientes");
                 });
 
             modelBuilder.Entity("ExpClinicoApi.Models.Global.GlColorCabello", b =>
@@ -463,10 +437,10 @@ namespace ExpClinicoApi.Migrations
                     b.Property<DateTime>("date")
                         .HasColumnType("datetime");
 
-                    b.Property<int>("idClsDoctor")
+                    b.Property<int>("idGlMedicoGrl")
                         .HasColumnType("int");
 
-                    b.Property<int>("idClsPaciente")
+                    b.Property<int>("idclsExpediente")
                         .HasColumnType("int");
 
                     b.HasKey("id");

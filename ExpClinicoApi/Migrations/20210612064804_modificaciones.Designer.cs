@@ -3,14 +3,16 @@ using System;
 using ExpClinicoApi;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ExpClinicoApi.Migrations
 {
     [DbContext(typeof(DbContextSystem))]
-    partial class DbContextSystemModelSnapshot : ModelSnapshot
+    [Migration("20210612064804_modificaciones")]
+    partial class modificaciones
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -32,34 +34,6 @@ namespace ExpClinicoApi.Migrations
                     b.HasKey("id");
 
                     b.ToTable("citas");
-                });
-
-            modelBuilder.Entity("ExpClinicoApi.Models.ClsDoctor", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<string>("nombreDoctor")
-                        .HasColumnType("text");
-
-                    b.HasKey("id");
-
-                    b.ToTable("MedicosGeneral");
-                });
-
-            modelBuilder.Entity("ExpClinicoApi.Models.ClsPaciente", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<string>("nombrePaciente")
-                        .HasColumnType("text");
-
-                    b.HasKey("id");
-
-                    b.ToTable("Pacientes");
                 });
 
             modelBuilder.Entity("ExpClinicoApi.Models.Global.GlColorCabello", b =>
