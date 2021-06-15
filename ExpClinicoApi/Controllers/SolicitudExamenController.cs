@@ -30,7 +30,7 @@ namespace ExpClinicoApi.Controllers
 
         // GET: api/solicitudExamen/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<List<Models.clsSolicitudExamen>>> GetsolicitudExamen(int id)
+        public async Task<ActionResult<Models.clsSolicitudExamen>> GetsolicitudExamen(int id)
         {
             var solicitudExamen = await _context.solicitudExamens.FindAsync(id);
             
@@ -43,7 +43,7 @@ namespace ExpClinicoApi.Controllers
                 return NotFound();
             }
 
-            return await _context.solicitudExamens.Include(x => x.detalleExamenes).ToListAsync(); 
+            return await _context.solicitudExamens.Include(x => x.detalleExamenes).FirstOrDefaultAsync(m=>m.id==id); 
         }
 
         // PUT: api/solicitudExamen/5
