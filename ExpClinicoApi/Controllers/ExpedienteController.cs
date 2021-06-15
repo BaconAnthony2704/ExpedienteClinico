@@ -95,13 +95,13 @@ namespace ExpClinicoApi.Controllers
             }
             clsInformacionPersonal informacionPersonal = new clsInformacionPersonal
             {
-                titulo=expediente.titulo,
+                titulo=createTitle(),
                 nombre=expediente.nombrePaciente,
                 apellido=expediente.apellidoPaciente,
                 domicilio=expediente.domicilioPaciente,
                 fechaNacimiento=expediente.fechaNacimiento,
                 idGenero=expediente.IdGenero,
-                UrlImagen=expediente.UrlImagen,
+                UrlImagen= "https://i.picsum.photos/id/450/200/300.jpg?hmac=EAnz3Z3i5qXfaz54l0aegp_-5oN4HTwiZG828ZGD7GM",
                 NoISSS=expediente.NoISSS
             };
             _context.InformacionPersonales.Add(informacionPersonal);
@@ -145,7 +145,7 @@ namespace ExpClinicoApi.Controllers
 
             var seguro = new GlComSeguro
             {
-                nombre=expediente.nombreSeguro,
+                nombre="Seguro "+generarNumExpediente(),
                 NoPoliza=expediente.poliza
             };
 
@@ -219,9 +219,12 @@ namespace ExpClinicoApi.Controllers
             });
         }
 
-
-
-
+        private string createTitle()
+        {
+            String title = "Crear expediente No.";
+            var ultimo = _context.Expedientes.OrderByDescending(x => x.idExpediente).First();
+            return title+ultimo.idExpediente.ToString();
+        }
 
         private List<clsIncapacidad> obtenerIncapacidades(int idExpediente)
         

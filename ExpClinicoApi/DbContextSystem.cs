@@ -1,5 +1,7 @@
 ﻿using ExpClinicoApi.Mapping;
+using ExpClinicoApi.Mapping.Componets;
 using ExpClinicoApi.Models;
+using ExpClinicoApi.Models.Components;
 using ExpClinicoApi.Models.Global;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -25,6 +27,14 @@ namespace ExpClinicoApi
 
         public DbSet<GlMedicoGrl> medicos  { get; set; }
         public DbSet<GlComSeguro> seguros { get; set; }
+        public DbSet<GlGenero> generos { get; set; }
+        public DbSet<GlEstadoCivil> EstadoCivils { get; set; }
+        public DbSet<GlTipoPiel> TipoPiels { get; set; }
+        public DbSet<GlColorCabello> ColorCabellos { get; set; }
+        public DbSet<GlHospital> Hospitales { get; set; }
+        
+
+        public DbSet<Tarjeta> Tarjetas { get; set; }
 
         public string ConnectionString { get; set; }
         public DbContextSystem()
@@ -58,6 +68,7 @@ namespace ExpClinicoApi
             modelBuilder.ApplyConfiguration(new InformacionPersonalMapping());
             modelBuilder.ApplyConfiguration(new MedicoGrlMapping());
             modelBuilder.ApplyConfiguration(new TipoPielMapping());
+            modelBuilder.ApplyConfiguration(new TarjetaMapping());
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

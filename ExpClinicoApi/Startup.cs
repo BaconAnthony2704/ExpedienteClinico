@@ -27,6 +27,7 @@ namespace ExpClinicoApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
             services.AddControllers();
             //services.Add(new ServiceDescriptor(typeof(DbContextSystem),
             //    new DbContextSystem(Configuration.GetConnectionString("DefaultConnection"))
@@ -39,6 +40,12 @@ namespace ExpClinicoApi
             //    options.AddPolicy("Todos",
             //        builder => builder.WithOrigins("*").WithHeaders("*").WithMethods("*"));
             //});
+            services.AddCors(
+                options =>
+                {
+                    options.AddPolicy("Todos", 
+                        builder => builder.WithOrigins("*").WithHeaders("*").WithMethods("*"));
+                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -48,7 +55,7 @@ namespace ExpClinicoApi
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            app.UseCors("Todos");
             app.UseHttpsRedirection();
 
             app.UseRouting();

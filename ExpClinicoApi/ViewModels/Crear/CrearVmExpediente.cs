@@ -10,8 +10,8 @@ namespace ExpClinicoApi.ViewModels.Crear
     {
         public int idExpediente { get; set; }
         //"public int idInformacionPersonal { get; set; }
-        public string ExpedienteNo { get; set; }
-        public string titulo { get; set; }
+        //public string ExpedienteNo { get; set; }
+        //public string titulo { get; set; }
         public string nombrePaciente { get; set; }
         public string apellidoPaciente { get; set; }
         public string domicilioPaciente { get; set; }
@@ -60,7 +60,7 @@ namespace ExpClinicoApi.ViewModels.Crear
 
         //clave idSeguro
         public int IdSeguro { get; set; }
-        public string nombreSeguro { get; set; }
+        //public string nombreSeguro { get; set; }
         public string poliza { get; set; }
         public DateTime ultimaVacuna { get; set; }
         public List<pivoteAlergiaExp> alergias { get; set; }
