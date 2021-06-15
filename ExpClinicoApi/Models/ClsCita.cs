@@ -5,10 +5,11 @@ using System.Threading.Tasks;
 
 namespace ExpClinicoApi.Models
 {
-    public class clsAlergia
+    public class ClsCita
     {
         public int id { get; set; }
-        public bool estado { get; set; }
-        public string nombre { get; set; }
+
+        public String nombrePaciente { get; set; }
+        public DateTime dateTime { get; set; }
     }
 }

@@ -5,10 +5,9 @@ using System.Threading.Tasks;
 
 namespace ExpClinicoApi.Models
 {
-    public class clsAlergia
+    public class ClsDoctor
     {
         public int id { get; set; }
-        public bool estado { get; set; }
-        public string nombre { get; set; }
+        public string nombreDoctor { get; set; }
     }
 }

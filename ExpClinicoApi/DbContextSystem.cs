@@ -14,7 +14,19 @@ namespace ExpClinicoApi
     public class DbContextSystem:DbContext
     {
         
-        public DbSet<Album> Albunes { get; set; }
+        
+        public DbSet<Models.Global.GlMedicoGrl> Medicos { get; set; }
+        public DbSet<clsSolicitudExamen> solicitudExamens { get; set; }
+        public DbSet<clsDetalleSolicitudExamen> DetalleSolicitudExamens { get; set; }
+        public DbSet<clsExamen> Examens { get; set; }
+        public DbSet<clsExpediente> Expedientes { get; set; }
+        public DbSet<ClsCita> citas { get; set; }
+        public DbSet<Models.ClsDoctor> MedicosGeneral { get; set; }
+        public DbSet<Models.ClsPaciente> Pacientes { get; set; }
+
+
+
+
         public DbSet<clsExpediente> Expedientes { get; set; }
         public DbSet<clsInformacionPersonal> InformacionPersonales { get; set; }
         public DbSet<clsInformacionAdicional> InformacionAdicionales { get; set; }
@@ -49,8 +61,9 @@ namespace ExpClinicoApi
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             
-            base.OnModelCreating(modelBuilder);
-            modelBuilder.ApplyConfiguration(new AlbumMapping());
+            
+            modelBuilder.Entity<clsDetalleSolicitudExamen>().HasKey(x => new {x.clsSolicitudExamenId, x.clsExamenId });
+            
             modelBuilder.ApplyConfiguration(new AlergiaExpMapping());
             modelBuilder.ApplyConfiguration(new AlergiaMapping());
             modelBuilder.ApplyConfiguration(new ColorCabelloMapping());
@@ -74,7 +87,7 @@ namespace ExpClinicoApi
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseMySQL("server=localhost;user=root;database=clinica;port=3306;password='';");
+                optionsBuilder.UseMySQL("server=localhost;user=root;database=prueba;port=3306;password='';");
             }
         }
     }

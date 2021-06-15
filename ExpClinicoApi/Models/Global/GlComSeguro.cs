@@ -7,7 +7,7 @@ namespace ExpClinicoApi.Models.Global
 {
     public class GlComSeguro
     {
-        public int idSeguro { get; set; }
+        public int id { get; set; }
         public string nombre { get; set; }
         public string NoPoliza { get; set; }
     }
