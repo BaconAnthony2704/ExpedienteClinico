@@ -32,8 +32,16 @@ namespace ExpClinicoApi
         public DbSet<GlTipoPiel> TipoPiels { get; set; }
         public DbSet<GlColorCabello> ColorCabellos { get; set; }
         public DbSet<GlHospital> Hospitales { get; set; }
-        
 
+
+        //nuevos DbSet de examen
+        public DbSet<clsExamen> Examenes { get; set; }
+        public DbSet<clsPaciente> Pacientes { get; set; }
+        public DbSet<clsSolicitudExamen> SolicitudExamenes { get; set; }
+        public DbSet<clsDetalleSolicitudExamen> DetalleSolicitudExamenes { get; set; }
+
+
+        //DbSet de componente Vue
         public DbSet<Tarjeta> Tarjetas { get; set; }
 
         public string ConnectionString { get; set; }
@@ -69,12 +77,20 @@ namespace ExpClinicoApi
             modelBuilder.ApplyConfiguration(new MedicoGrlMapping());
             modelBuilder.ApplyConfiguration(new TipoPielMapping());
             modelBuilder.ApplyConfiguration(new TarjetaMapping());
+            //Nuevos mapping
+            modelBuilder.ApplyConfiguration(new PacienteMapping());
+            modelBuilder.ApplyConfiguration(new ExamenMapping());
+            modelBuilder.ApplyConfiguration(new SolicitudExamenMapping());
+            modelBuilder.ApplyConfiguration(new DetalleSolicitudExamenMapping());
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseMySQL("server=localhost;user=root;database=clinica;port=3306;password='';");
+                //dev
+                //optionsBuilder.UseMySQL("server=localhost;user=root;database=clinica;port=3306;password='';");
+                //prod
+                optionsBuilder.UseMySQL("server=remotemysql.com;user=3ExE2H1Roh;port=3306;database=3ExE2H1Roh;password='Zr6eXf4jyi';");
             }
         }
     }

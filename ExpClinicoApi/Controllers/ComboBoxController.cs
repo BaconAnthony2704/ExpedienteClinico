@@ -1,4 +1,5 @@
 ﻿using ExpClinicoApi.Models.Global;
+using ExpClinicoApi.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -85,5 +86,28 @@ namespace ExpClinicoApi.Controllers
                 NoPoliza=g.NoPoliza
             });
         }
+        [HttpGet("[action]")]
+        public async Task<IEnumerable<vmMedicoGrl>> ListarMedico()
+        {
+            var medicos = await _context.medicos.ToListAsync();
+            return medicos.Select(g => new vmMedicoGrl
+            {
+                idMedicoGrl=g.idMedicoGrl,
+                nombre=g.nombre
+            });
+        }
+        [HttpGet("[action]")]
+        public async Task<IEnumerable<vmPaciente>> ListarPaciente()
+        {
+            var pacientes = await _context.Pacientes
+                .Include(e=>e.expediente.informacionPersonal)
+                .ToListAsync();
+            return pacientes.Select(g => new vmPaciente
+            {
+                idPaciente=g.idPaciente,
+                nombre=g.expediente.informacionPersonal.nombre+", "+g.expediente.informacionPersonal.apellido
+            });
+        }
+
     }
 }
