@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using ExpClinicoApi.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -21,17 +22,17 @@ namespace ExpClinicoApi.Controllers
 
         // GET: api/Citas
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Models.clsCita>>> Getcitas()
+        public async Task<ActionResult<IEnumerable<clsCita>>> Getcitas()
         {
             return await _context.citas.ToListAsync();
         }
 
         //filtrado de historial medico para los paciente
         //silmulado en primer momento por un nombre pasado como string
-        
+
         // GET: api/ClsCitas/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Models.clsCita>> GetClsCita(int id)
+        public async Task<ActionResult<clsCita>> GetClsCita(int id)
         {
             var clsCita = await _context.citas.FindAsync(id);
 
@@ -47,7 +48,7 @@ namespace ExpClinicoApi.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutClsCita(int id, Models.clsCita clsCita)
+        public async Task<IActionResult> PutClsCita(int id,clsCita clsCita)
         {
             if (id != clsCita.id)
             {
@@ -79,7 +80,7 @@ namespace ExpClinicoApi.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Models.clsCita>> PostClsCita(Models.clsCita clsCita)
+        public async Task<ActionResult<clsCita>> PostClsCita(clsCita clsCita)
         {
             _context.citas.Add(clsCita);
             await _context.SaveChangesAsync();
@@ -89,7 +90,7 @@ namespace ExpClinicoApi.Controllers
 
         // DELETE: api/ClsCitas/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Models.clsCita>> DeleteClsCita(int id)
+        public async Task<ActionResult<clsCita>> DeleteClsCita(int id)
         {
             var clsCita = await _context.citas.FindAsync(id);
             if (clsCita == null)
