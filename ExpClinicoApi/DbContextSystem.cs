@@ -40,6 +40,7 @@ namespace ExpClinicoApi
         public DbSet<clsSolicitudExamen> SolicitudExamenes { get; set; }
         public DbSet<clsDetalleSolicitudExamen> DetalleSolicitudExamenes { get; set; }
 
+        public DbSet<clsCita> citas { get; set; }
 
         //DbSet de componente Vue
         public DbSet<Tarjeta> Tarjetas { get; set; }
@@ -82,6 +83,8 @@ namespace ExpClinicoApi
             modelBuilder.ApplyConfiguration(new ExamenMapping());
             modelBuilder.ApplyConfiguration(new SolicitudExamenMapping());
             modelBuilder.ApplyConfiguration(new DetalleSolicitudExamenMapping());
+            //agreggo mapping de citas
+            modelBuilder.ApplyConfiguration(new CitaMapping());
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
