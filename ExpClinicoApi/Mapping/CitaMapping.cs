@@ -12,7 +12,7 @@ namespace ExpClinicoApi.Mapping
     {
         public void Configure(EntityTypeBuilder<clsCita> builder)
         {
-            builder.ToTable("tblcitas").HasKey(c => c.id);
+            builder.ToTable("tblcita").HasKey(c => c.idCita);
         }
     }
 }

@@ -175,7 +175,19 @@ namespace ExpClinicoApi.Controllers
             };
 
             _context.Expedientes.Add(clsExpediente);
+            //Guardamos el expediente
             _context.SaveChanges();
+
+            //Se agrego el modelo de paciente, para guardar de forma predifinida el expediente 
+            //Creamos la instancia de paciente, con el expediente, recien creado
+            clsPaciente paciente = new clsPaciente
+            {
+                idExpediente = clsExpediente.idExpediente,
+                isPaciente=true
+            };
+            _context.Pacientes.Add(paciente);
+            _context.SaveChanges();
+
             //obtenemos el idExpediente para guardar alergias
 
             //llenamos las alergias del expediente
