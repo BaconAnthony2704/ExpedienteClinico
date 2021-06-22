@@ -92,7 +92,7 @@ namespace ExpClinicoApi
             {
                 var stringCon = new StringConexion();
                 String r=stringCon.obtenerRuta();
-                optionsBuilder.UseMySQL(r);
+                optionsBuilder.UseMySQL("server=remotemysql.com;user=3ExE2H1Roh;port=3306;database=3ExE2H1Roh;password='Zr6eXf4jyi';");
             }
         }
     }
