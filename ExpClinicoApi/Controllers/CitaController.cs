@@ -75,5 +75,49 @@ namespace ExpClinicoApi.Controllers
 
 
         }
+        // DELETE: api/ClsCita/5
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<clsCita>> DeleteClsCita(int id)
+        {
+            var clsCita = await _context.citas.FindAsync(id);
+            if (clsCita == null)
+            {
+                return NotFound();
+            }
+
+            _context.citas.Remove(clsCita);
+            await _context.SaveChangesAsync();
+
+            return clsCita;
+        }
+        [HttpGet("{id}")]
+        public async Task<ActionResult<clsCita>> GetClsCita(int id)
+        {
+            var clsCita = await _context.citas.FindAsync(id);
+
+            if (clsCita == null)
+            {
+                return NotFound();
+            }
+
+            return clsCita;
+        }
+
+        [HttpGet("[action]")]
+        public async Task<IEnumerable<vmCita>> ObtenerCita()
+        {
+            var ahora = DateTime.Now;
+
+
+            var citas= await _context.citas
+                .Include(x=>x.paciente.expediente.informacionPersonal)
+                .Where(x => x.fechaIngreso.Day == ahora.Day)
+                .OrderBy(p => p.fechaIngreso.Hour).Take(5).ToListAsync();
+            return citas.Select(x=>new vmCita {
+                nombrePaciente=x.paciente.expediente.informacionPersonal.nombre+","+x.paciente.expediente.informacionPersonal.apellido,
+                fechaIngreso=x.fechaIngreso,
+                idCita=x.idCita
+            });
+        }
     }
 }
