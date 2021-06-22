@@ -106,7 +106,7 @@ namespace ExpClinicoApi.Controllers
         [HttpGet("[action]")]
         public async Task<IEnumerable<vmCita>> ObtenerCita()
         {
-            var ahora = DateTime.Now;
+            var ahora = DateTime.Now.AddHours(-6);
 
 
             var citas= await _context.citas
@@ -117,6 +117,7 @@ namespace ExpClinicoApi.Controllers
                 nombrePaciente=x.paciente.expediente.informacionPersonal.nombre+","+x.paciente.expediente.informacionPersonal.apellido,
                 fechaIngreso=x.fechaIngreso,
                 idCita=x.idCita
+
             });
         }
     }
