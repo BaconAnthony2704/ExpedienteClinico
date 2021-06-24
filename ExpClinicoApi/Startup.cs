@@ -56,6 +56,7 @@ namespace ExpClinicoApi
                 app.UseDeveloperExceptionPage();
             }
             app.UseCors("Todos");
+
             app.UseHttpsRedirection();
 
             app.UseRouting();
