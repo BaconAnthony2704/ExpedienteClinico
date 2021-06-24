@@ -169,8 +169,8 @@ namespace ExpClinicoApi.Controllers
             {
                 idInformacionPersonal=informacionPersonal.idInformacionPersonal,
                 idInformacionAdicional=informacionAdicional.idInformacionAdicional,
-                idExploracionFisica=informacionPersonal.idInformacionPersonal,
-                idHistorialMedico=informacionPersonal.idInformacionPersonal,
+                idExploracionFisica=exploracionFisica.idExploracionFisica,
+                idHistorialMedico=historialMedico.idHistorialMedico,
                 fechaCreacion=DateTime.Now
             };
 
