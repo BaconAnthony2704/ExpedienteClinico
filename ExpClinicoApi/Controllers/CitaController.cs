@@ -46,17 +46,33 @@ namespace ExpClinicoApi.Controllers
             {
                 return BadRequest();
             }
-            clsCita nuevaCita = new clsCita
-            {
-                fechaIngreso = cita.fechaIngreso,
-                idPaciente = cita.idPaciente
-            };
+            
 
             try
             {
-                _context.citas.Add(nuevaCita);
-                _context.SaveChanges();
-                await _context.SaveChangesAsync();
+                clsCita nuevaCita = new clsCita
+                {
+                    fechaIngreso = cita.fechaIngreso,
+                    idPaciente = cita.idPaciente
+                };
+
+                var ahora = DateTime.Now.AddHours(-6);
+                if (nuevaCita.fechaIngreso.Day >= ahora.Day)
+                {
+                    _context.citas.Add(nuevaCita);
+                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
+
+                }
+                else
+                {
+                    return BadRequest(new
+                    {
+                        ok = false,
+                        message = "verifique la fecha de la cita"
+                    });
+                }
+               
             }
             catch (Exception)
             {
