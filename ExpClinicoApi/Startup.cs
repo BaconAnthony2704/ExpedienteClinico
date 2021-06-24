@@ -43,10 +43,12 @@ namespace ExpClinicoApi
             services.AddCors(
                 options =>
                 {
-                    options.AddPolicy("Todos", 
+                    options.AddDefaultPolicy( 
                         builder => builder.WithOrigins("*", "http://localhost:8080", "https://apiexpediente.herokuapp.com", "https://expedientecli.herokuapp.com")
                         .AllowAnyHeader()
-                        .AllowAnyMethod());
+                        .AllowAnyMethod()
+                        .WithMethods("*")
+                        .WithHeaders("*"));
                 });
         }
 
@@ -57,7 +59,7 @@ namespace ExpClinicoApi
             {
                 app.UseDeveloperExceptionPage();
             }
-            app.UseCors("Todos");
+            app.UseCors();
 
             app.UseHttpsRedirection();
 
