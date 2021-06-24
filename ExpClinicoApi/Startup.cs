@@ -44,7 +44,7 @@ namespace ExpClinicoApi
                 options =>
                 {
                     options.AddPolicy("Todos", 
-                        builder => builder.WithOrigins("*")
+                        builder => builder.WithOrigins("*", "http://localhost:8080/", "https://apiexpediente.herokuapp.com/")
                         .WithHeaders("*")
                         .WithMethods("*"));
                 });
