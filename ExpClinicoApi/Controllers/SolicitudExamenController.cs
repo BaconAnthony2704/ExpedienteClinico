@@ -31,6 +31,7 @@ namespace ExpClinicoApi.Controllers
                 .Include(e=>e.paciente)
                 .Include(e=>e.paciente.expediente)
                 .Include(e=>e.paciente.expediente.informacionPersonal)
+                .OrderByDescending(e=>e.fechaIngreso)
                 .ToListAsync();
             return respuesta.Select(e => new vmSolicitudExamen
             {
@@ -72,7 +73,7 @@ namespace ExpClinicoApi.Controllers
             //Creamos el modelo solicitudExamen
             clsSolicitudExamen solExamen = new clsSolicitudExamen
             {
-                fechaIngreso=DateTime.Now,
+                fechaIngreso=DateTime.Now.AddHours(-6),
                 idMedicoGrl=solicitudExamen.idMedicoGrl,
                 idPaciente=solicitudExamen.idPaciente
             };

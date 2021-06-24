@@ -127,7 +127,7 @@ namespace ExpClinicoApi.Controllers
 
             var citas= await _context.citas
                 .Include(x=>x.paciente.expediente.informacionPersonal)
-                .Where(x => x.fechaIngreso.Day == ahora.Day)
+                .Where(x => x.fechaIngreso >= ahora)
                 .OrderBy(p => p.fechaIngreso.Hour).Take(5).ToListAsync();
             return citas.Select(x=>new vmCita {
                 nombrePaciente=x.paciente.expediente.informacionPersonal.nombre+","+x.paciente.expediente.informacionPersonal.apellido,
