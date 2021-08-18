@@ -27,13 +27,13 @@ namespace ExpClinicoApi.Controllers
         public async Task<IEnumerable<vmCita>> Listar()
         {
             var citas = await _context.citas
-                .Include(c=>c.paciente.expediente.informacionPersonal)
+                .Include(c => c.paciente.expediente.informacionPersonal)
                 .ToListAsync();
             return citas.Select(c => new vmCita
             {
-                idCita=c.idCita,
-                nombrePaciente=c.paciente.expediente.informacionPersonal.nombre+", "+c.paciente.expediente.informacionPersonal.apellido,
-                fechaIngreso=c.fechaIngreso
+                idCita = c.idCita,
+                nombrePaciente = c.paciente.expediente.informacionPersonal.nombre + ", " + c.paciente.expediente.informacionPersonal.apellido,
+                fechaIngreso = c.fechaIngreso
             });
 
         }
@@ -46,7 +46,7 @@ namespace ExpClinicoApi.Controllers
             {
                 return BadRequest();
             }
-            
+
 
             try
             {
@@ -72,7 +72,7 @@ namespace ExpClinicoApi.Controllers
                         message = "verifique la fecha de la cita"
                     });
                 }
-               
+
             }
             catch (Exception)
             {
@@ -103,9 +103,16 @@ namespace ExpClinicoApi.Controllers
 
             _context.citas.Remove(clsCita);
             await _context.SaveChangesAsync();
-
-            return clsCita;
+            return Ok(
+                new
+                {
+                    ok = true,
+                    message = "Se ha borrado la cita de forma correcta"
+                });
+            //return clsCita;
         }
+
+        //detalle de cada cita ingresando el id
         [HttpGet("{id}")]
         public async Task<ActionResult<clsCita>> GetClsCita(int id)
         {
@@ -119,22 +126,62 @@ namespace ExpClinicoApi.Controllers
             return clsCita;
         }
 
+
+        //update 
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutCitas(int id, vmCita cita)
+        {
+            if (id != cita.idCita)
+            {
+                return BadRequest();
+            }
+
+            _context.Entry(cita).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!CitaExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
+        }
+
+
+
+        //logica para obtener las 5 citas proximas.
+        //se agrega "[action]" para mapear la url con el nombre del metodo, debido a que es otro metodo get
         [HttpGet("[action]")]
         public async Task<IEnumerable<vmCita>> ObtenerCita()
         {
             var ahora = DateTime.Now.AddHours(-6);
 
 
-            var citas= await _context.citas
-                .Include(x=>x.paciente.expediente.informacionPersonal)
+            var citas = await _context.citas
+                .Include(x => x.paciente.expediente.informacionPersonal)
                 .Where(x => x.fechaIngreso >= ahora)
                 .OrderBy(p => p.fechaIngreso.Hour).Take(5).ToListAsync();
-            return citas.Select(x=>new vmCita {
-                nombrePaciente=x.paciente.expediente.informacionPersonal.nombre+","+x.paciente.expediente.informacionPersonal.apellido,
-                fechaIngreso=x.fechaIngreso,
-                idCita=x.idCita
+            return citas.Select(x => new vmCita
+            {
+                nombrePaciente = x.paciente.expediente.informacionPersonal.nombre + "," + x.paciente.expediente.informacionPersonal.apellido,
+                fechaIngreso = x.fechaIngreso,
+                idCita = x.idCita
 
             });
+        }
+        private bool CitaExists(int id)
+        {
+            return _context.citas.Any(e => e.idCita == id);
         }
     }
 }
