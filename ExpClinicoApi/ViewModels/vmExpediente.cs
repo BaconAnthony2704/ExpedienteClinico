@@ -47,6 +47,7 @@ namespace ExpClinicoApi.ViewModels
         public List<clsAlergia> alergias { get; set; }
         public List<clsIncapacidad> incapacidades { get; set; }
         public DateTime fechaCreacion { get; set; }
+        public int isActive { get; set; }
 
     }
 }

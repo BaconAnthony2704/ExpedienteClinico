@@ -68,5 +68,6 @@ namespace ExpClinicoApi.ViewModels.Crear
         //public DateTime fechaCreacion { get; set; }
         public string TipoPiel { get; set; }
         public string ColorCabello { get; set; }
+        public int isActive { get; set; }
     }
 }

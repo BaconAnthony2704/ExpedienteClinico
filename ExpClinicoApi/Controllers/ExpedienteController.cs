@@ -80,9 +80,10 @@ namespace ExpClinicoApi.Controllers
                 incapacidades=obtenerIncapacidades(exp.idExpediente),
                 fechaCreacion=exp.fechaCreacion,
                 idExpediente=exp.idExpediente,
-                idInformacionPersonal=exp.informacionPersonal.idInformacionPersonal
+                idInformacionPersonal=exp.informacionPersonal.idInformacionPersonal,
+                isActive=exp.isActive
 
-            });
+            }).Where(e=>e.isActive==1);
         }
 
         //POST: api/Expediente/Crear
@@ -296,6 +297,45 @@ namespace ExpClinicoApi.Controllers
             {
                 ok = true,
                 message = "Se ha actualizado el expediente de forma correcta"
+            });
+        }
+
+
+        [HttpPut("[action]/{idExpediente}")]
+        public async Task<ActionResult<clsExpediente>> Eliminar([FromRoute] int idExpediente)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+            if (idExpediente <= 0)
+            {
+                return BadRequest();
+            }
+            var expe = await _context.Expedientes.FirstOrDefaultAsync(e => e.idExpediente == idExpediente);
+            if (expe == null)
+            {
+                return NotFound();
+            }
+            expe.isActive = 0;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateException e)
+            {
+
+                return BadRequest(new
+                {
+                    ok = false,
+                    message = "Problemas al eliminar expediente, verifique " + e.Message
+                });
+            }
+            return Ok(new
+            {
+                ok = true,
+                message = "Se ha eliminado el expediente de forma correcta"
             });
         }
 

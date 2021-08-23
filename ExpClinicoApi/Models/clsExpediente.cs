@@ -45,6 +45,7 @@ namespace ExpClinicoApi.Models
 
         //[Column("idHisto")]
         public int? idHistorialMedico { get; set; }
+        public int isActive { get; set; }
         //public int? idAlergias { get; set; }
         //public int? idIncapacidad { get; set; }
     }
