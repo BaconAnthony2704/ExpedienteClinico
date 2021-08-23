@@ -101,7 +101,7 @@ namespace ExpClinicoApi.Controllers
                 domicilio=expediente.domicilioPaciente,
                 fechaNacimiento=expediente.fechaNacimiento,
                 idGenero=expediente.IdGenero,
-                UrlImagen= "https://i.picsum.photos/id/450/200/300.jpg?hmac=EAnz3Z3i5qXfaz54l0aegp_-5oN4HTwiZG828ZGD7GM",
+                UrlImagen= expediente.UrlImagen,
                 NoISSS=expediente.NoISSS
             };
             _context.InformacionPersonales.Add(informacionPersonal);
@@ -228,6 +228,74 @@ namespace ExpClinicoApi.Controllers
             return Ok(new {
                 ok=true,
                 message="Se ha guardado el expediente de forma correcta"
+            });
+        }
+
+
+        //PUT: api/Expediente/Actualizar
+        [HttpPut("[action]")]
+        public async Task<ActionResult<clsExpediente>> Actualizar([FromBody] CrearVmExpediente expediente)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+            if (expediente.idExpediente<=0)
+            {
+                return BadRequest();
+            }
+            var expe = await _context.Expedientes.FirstOrDefaultAsync(e => e.idExpediente == expediente.idExpediente);
+            if (expe == null)
+            {
+                return NotFound();
+            }
+            expe.fechaCreacion = DateTime.Now;
+            var infoPer = await _context.InformacionPersonales.FirstOrDefaultAsync(e => e.idInformacionPersonal == expe.idInformacionPersonal);
+            infoPer.nombre = expediente.nombrePaciente;
+            infoPer.apellido = expediente.apellidoPaciente;
+            infoPer.domicilio = expediente.domicilioPaciente;
+            infoPer.fechaNacimiento = expediente.fechaNacimiento;
+            infoPer.idGenero = expediente.IdGenero;
+            //infoPer.UrlImagen = expediente.UrlImagen;
+            //_context.SaveChanges();
+
+            var inforAdi = await _context.InformacionAdicionales.FirstOrDefaultAsync(e => e.idInformacionAdicional == expe.idInformacionAdicional);
+            inforAdi.lugarNacimiento = expediente.LugarNacimiento;
+            inforAdi.telefonoDomicilio = expediente.telefonoDomicilio;
+            inforAdi.telefonoOficina = expediente.telefonoOficina;
+            inforAdi.responsableA = expediente.responsableA;
+            //_context.SaveChanges();
+
+            var expFi = await _context.ExploracionesFisicas.FirstOrDefaultAsync(e => e.idExploracionFisica == expe.idExploracionFisica);
+            expFi.altura = expediente.altura;
+            expFi.peso = expediente.peso;
+            expFi.OcupaLentes = expediente.ocupaLentes;
+            expFi.ProblemaAuditivo = expediente.problemaAuditivo;
+            expFi.idTipoPiel = _context.TipoPiels.Where(t => t.tipo.Contains(expediente.TipoPiel)).Select(t => t.idTipoPiel).FirstOrDefault();
+            expFi.idColorCabello = _context.ColorCabellos.Where(c=>c.colorCabello.Contains(expediente.ColorCabello)).Select(c=>c.idColorCabello).FirstOrDefault();
+           //_context.SaveChanges();
+
+            //var hisM = await _context.HistorialMedicos.FirstOrDefaultAsync(e => e.idHistorialMedico == expe.idHistorialMedico);
+            
+            
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateException e)
+            {
+
+                return BadRequest(new
+                {
+                    ok = false,
+                    message = "Problemas al actualizar expediente, verifique "+e.Message
+                });
+            }
+            return Ok(new
+            {
+                ok = true,
+                message = "Se ha actualizado el expediente de forma correcta"
             });
         }
 

@@ -66,5 +66,7 @@ namespace ExpClinicoApi.ViewModels.Crear
         public List<pivoteAlergiaExp> alergias { get; set; }
         public List<pivoteIncapacidadExpediente> incapacidades { get; set; }
         //public DateTime fechaCreacion { get; set; }
+        public string TipoPiel { get; set; }
+        public string ColorCabello { get; set; }
     }
 }
