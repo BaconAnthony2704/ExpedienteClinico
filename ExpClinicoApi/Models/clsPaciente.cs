@@ -16,6 +16,6 @@ namespace ExpClinicoApi.Models
         public bool isPaciente { get; set; }
 
         //atributos opcionales
-        public int? idExpediente { get; set; }
+        public int idExpediente { get; set; }
     }
 }

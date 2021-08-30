@@ -40,7 +40,13 @@ namespace ExpClinicoApi
         public DbSet<clsSolicitudExamen> SolicitudExamenes { get; set; }
         public DbSet<clsDetalleSolicitudExamen> DetalleSolicitudExamenes { get; set; }
 
-        public DbSet<clsCita> citas { get; set; }
+        public DbSet<clsCita> citas { get; set; } 
+
+        //DbSet para consulta
+        public DbSet<clsTipoConsulta> TipoConsulta { get; set; }
+        public DbSet<clsReceta> Receta { get; set; }
+        public DbSet<clsConsulta> Consulta { get; set; }
+        public DbSet<clsSignosVitales> SignosVitales { get; set; }
 
         //DbSet de componente Vue
         public DbSet<Tarjeta> Tarjetas { get; set; }
@@ -85,6 +91,12 @@ namespace ExpClinicoApi
             modelBuilder.ApplyConfiguration(new DetalleSolicitudExamenMapping());
             //agreggo mapping de citas
             modelBuilder.ApplyConfiguration(new CitaMapping());
+
+            //mapping para la consulta
+            modelBuilder.ApplyConfiguration(new TipoConsultaMapping());
+            modelBuilder.ApplyConfiguration(new RecetaMapping());
+            modelBuilder.ApplyConfiguration(new ConsultaMapping());
+            modelBuilder.ApplyConfiguration(new SignosVitalesMapping());
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -93,7 +105,7 @@ namespace ExpClinicoApi
 
                 // optionsBuilder.UseMySQL("server=remotemysql.com;user=3ExE2H1Roh;port=3306;database=3ExE2H1Roh;password='Zr6eXf4jyi';");
 
-                optionsBuilder.UseMySQL("server=localhost;user=root;database=clinica;port=3306;password='';");
+                optionsBuilder.UseMySQL("server=localhost;user=root;database=clinica;port=3306;password='root';");
             }
         }
     }

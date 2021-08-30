@@ -21,6 +21,7 @@ namespace ExpClinicoApi.Controllers
         {
             _context = context;
         }
+        
         //GET: api/Expediente/Listar
         [HttpGet("[action]")]
         public async Task<IEnumerable<vmExpediente>> Listar()
@@ -40,6 +41,7 @@ namespace ExpClinicoApi.Controllers
                 //.Include(e=>e.alergias)
                 //.Include(e=>e.incapacidades)
                 .ToListAsync();
+            
             return expediente.Select(exp=>new vmExpediente
             {
                 titulo=exp.informacionPersonal.titulo,
@@ -83,7 +85,7 @@ namespace ExpClinicoApi.Controllers
                 idInformacionPersonal=exp.informacionPersonal.idInformacionPersonal,
                 isActive=exp.isActive
 
-            }).Where(e=>e.isActive==1);
+            }).Where(e=>e.isActive==0);
         }
 
         //POST: api/Expediente/Crear
@@ -278,8 +280,6 @@ namespace ExpClinicoApi.Controllers
 
             //var hisM = await _context.HistorialMedicos.FirstOrDefaultAsync(e => e.idHistorialMedico == expe.idHistorialMedico);
             
-            
-
             try
             {
                 await _context.SaveChangesAsync();
