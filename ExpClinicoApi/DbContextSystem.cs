@@ -32,6 +32,7 @@ namespace ExpClinicoApi
         public DbSet<GlTipoPiel> TipoPiels { get; set; }
         public DbSet<GlColorCabello> ColorCabellos { get; set; }
         public DbSet<GlHospital> Hospitales { get; set; }
+        public DbSet<clsLoginUserModel> Logins { get; set; }
 
 
         //nuevos DbSet de examen
@@ -97,15 +98,18 @@ namespace ExpClinicoApi
             modelBuilder.ApplyConfiguration(new RecetaMapping());
             modelBuilder.ApplyConfiguration(new ConsultaMapping());
             modelBuilder.ApplyConfiguration(new SignosVitalesMapping());
+
+            //mapping de login
+            modelBuilder.ApplyConfiguration(new LoginUserMapping());
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
 
-                optionsBuilder.UseMySQL("server=remotemysql.com;user=3ExE2H1Roh;port=3306;database=3ExE2H1Roh;password='Zr6eXf4jyi';");
+                //optionsBuilder.UseMySQL("server=remotemysql.com;user=3ExE2H1Roh;port=3306;database=3ExE2H1Roh;password='Zr6eXf4jyi';");
 
-                //optionsBuilder.UseMySQL("server=localhost;user=root;database=clinica;port=3306;password='';");
+                optionsBuilder.UseMySQL("server=localhost;user=root;database=clinica;port=3306;password='';");
             }
         }
     }
