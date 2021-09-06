@@ -44,9 +44,9 @@ namespace ExpClinicoApi
                 options =>
                 {
                     options.AddPolicy("Todos", 
-                        builder => builder.WithOrigins("*")
-                        .WithHeaders("*")
-                        .WithMethods("*"));
+                        builder => builder.AllowAnyOrigin()
+                        .AllowAnyHeader()
+                        .AllowAnyMethod());
                 });
         }
 
