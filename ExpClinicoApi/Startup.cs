@@ -40,14 +40,7 @@ namespace ExpClinicoApi
             //    options.AddPolicy("Todos",
             //        builder => builder.WithOrigins("*").WithHeaders("*").WithMethods("*"));
             //});
-            services.AddCors(
-                options =>
-                {
-                    options.AddPolicy("Todos", 
-                        builder => builder.AllowAnyOrigin()
-                        .AllowAnyHeader()
-                        .AllowAnyMethod());
-                });
+            services.AddCors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -57,7 +50,11 @@ namespace ExpClinicoApi
             {
                 app.UseDeveloperExceptionPage();
             }
-            app.UseCors("Todos");
+            app.UseCors(x => x
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .SetIsOriginAllowed(origin => true) // allow any origin
+                .AllowCredentials());
 
             app.UseHttpsRedirection();
 
