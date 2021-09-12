@@ -85,7 +85,7 @@ namespace ExpClinicoApi.Controllers
                 idInformacionPersonal=exp.informacionPersonal.idInformacionPersonal,
                 isActive=exp.isActive
 
-            }).Where(e=>e.isActive==0);
+            }).Where(e=>e.isActive==1);
         }
 
         //POST: api/Expediente/Crear

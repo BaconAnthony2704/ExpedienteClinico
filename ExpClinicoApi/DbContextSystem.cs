@@ -53,6 +53,11 @@ namespace ExpClinicoApi
         public DbSet<Tarjeta> Tarjetas { get; set; }
 
         public string ConnectionString { get; set; }
+        //Nuevos dbset de modulo de ingreso/egreso
+        public DbSet<clsConcepto> Conceptos { get; set; }
+        public DbSet<clsMovimiento> Movimientos { get; set; }
+        public DbSet<clsDetalleMovimiento> DetalleMovimientos { get; set; }
+
         public DbContextSystem()
         {
            
@@ -101,6 +106,11 @@ namespace ExpClinicoApi
 
             //mapping de login
             modelBuilder.ApplyConfiguration(new LoginUserMapping());
+
+            //mapping de modulo de ingreso/egreso
+            modelBuilder.ApplyConfiguration(new ConceptoMapping());
+            modelBuilder.ApplyConfiguration(new MovimientoMapping());
+            modelBuilder.ApplyConfiguration(new DetalleMovimientoMapping());
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -108,9 +118,9 @@ namespace ExpClinicoApi
             {
 
                 //optionsBuilder.UseMySQL("server=remotemysql.com;user=3ExE2H1Roh;port=3306;database=3ExE2H1Roh;password='Zr6eXf4jyi';");
-                optionsBuilder.UseMySQL("server=sql3.freemysqlhosting.net;user=sql3435510;port=3306;database=sql3435510;password='XzxuMuNzFF';");
+                //optionsBuilder.UseMySQL("server=sql3.freemysqlhosting.net;user=sql3435510;port=3306;database=sql3435510;password='XzxuMuNzFF';");
 
-                //optionsBuilder.UseMySQL("server=localhost;user=root;database=clinica;port=3306;password='';");
+                optionsBuilder.UseMySQL("server=localhost;user=root;database=clinica;port=3306;password='';");
                 //optionsBuilder.UseMySQL("server=db4free.net;user=zr6exf4jyi;port=3306;database=clinicazr6exf4jy;password='zr6exf4jyi';");
             }
         }
