@@ -12,7 +12,7 @@ namespace ExpClinicoApi.Mapping
     {
         public void Configure(EntityTypeBuilder<clsMovimiento> builder)
         {
-            builder.ToTable("tblMovimiento").HasKey(m => m.IdMovimiento);
+            builder.ToTable("tblmovimiento").HasKey(m => m.IdMovimiento);
         }
     }
 }

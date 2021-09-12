@@ -23,7 +23,7 @@ namespace ExpClinicoApi.Controllers
         }
         // GET: api/<DetalleMovimientoController>
         [HttpGet("[action]")]
-        public async Task<ActionResult<object>> Listar() 
+        public async Task<ActionResult<vmDetalleMovimiento>> Listar() 
         {
             try
             {
