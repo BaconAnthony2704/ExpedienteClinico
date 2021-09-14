@@ -62,6 +62,7 @@ namespace ExpClinicoApi.Controllers
                 username = lo.username
             }).Where(c=>
             c.username.Contains(GetLogin.username) && 
+            c.isactive==true &&
             c.password.Contains(pass)).FirstOrDefault();
             if (lo!=null)
             {
@@ -133,8 +134,165 @@ namespace ExpClinicoApi.Controllers
                 );
 
         }
+        [HttpPut("[action]/{IdUser}")]
+        public async Task<ActionResult<vmLogin>> Editar([FromBody] CrearLogin login,int IdUser)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
 
-        
+            var user = _context.Logins.FirstOrDefault(l => l.idUser == IdUser);
+            if (user != null)
+            {
+                user.password = CypherHelper.Encrypt(login.password);
+                user.name = login.name;
+                user.username = login.username;
+                   
+            }
+            
+
+            try
+            {
+                
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception)
+            {
+
+                return BadRequest();
+            }
+            return Ok(
+                new
+                {
+                    ok = true,
+                    obj = "Se ha actualizado el usuario"
+                }
+                );
+
+        }
+
+        [HttpPut("[action]/{IdUser}")]
+        public async Task<ActionResult<vmLogin>> Desactivar([FromRoute] int IdUser)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            if (_context.Logins.Select(lo => lo.idUser).Where(c => c.Equals(IdUser)).Count() == 1)
+            {
+                var user = _context.Logins.ToList().FirstOrDefault(l=>l.idUser==IdUser);
+                user.isactive = false;
+            }
+
+            
+            
+            try
+            {
+                
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception)
+            {
+
+                return BadRequest();
+            }
+            return Ok(
+                new
+                {
+                    ok = true,
+                    obj = "El usuario se ha desactivado"
+                }
+                );
+
+        }
+
+        [HttpPut("[action]/{IdUser}")]
+        public async Task<ActionResult<vmLogin>> Activar([FromRoute] int IdUser)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            if (_context.Logins.Select(lo => lo.idUser).Where(c => c.Equals(IdUser)).Count() == 1)
+            {
+                var user = _context.Logins.ToList().FirstOrDefault(l => l.idUser == IdUser);
+                user.isactive = true;
+            }
+
+
+
+            try
+            {
+
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception)
+            {
+
+                return BadRequest();
+            }
+            return Ok(
+                new
+                {
+                    ok = true,
+                    obj = "El usuario se ha activado"
+                }
+                );
+
+        }
+
+        // POST api/Login/CrearToJson
+        [HttpPost("[action]")]
+        public async Task<ActionResult<clsLoginUserModel>> Creartojson([FromBody] List<CrearUser> listUser)
+        {
+            //List<CrearUser> nuevaListaFiltrada = new List<CrearUser>();
+            //var listaUsr = await _context.Logins.ToListAsync();
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(
+                    new
+                    {
+                        ok = false,
+                        msg = "El modelo no es valido"
+                    });
+            }
+
+            //Llenar la tabla concepto
+            foreach (CrearUser usrs in listUser)
+            {
+                var u = new clsLoginUserModel
+                {
+                    isactive = true,
+                    modified = DateTime.Now,
+                    username = usrs.username,
+                    name = usrs.name,
+                    password = CypherHelper.Encrypt(usrs.password)
+                };
+                _context.Logins.Add(u);
+            }
+            try
+            {
+
+                await _context.SaveChangesAsync();
+                return Ok(
+                    new
+                    {
+                        ok = true,
+                        msg = "Se ha ingresado correctamente"
+                    }
+                );
+            }
+            catch (Exception)
+            {
+
+                return BadRequest(new { ok = false, msg = "Problemas en la insersion" });
+            }
+        }
+
+
     }
 
 }
