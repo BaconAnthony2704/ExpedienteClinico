@@ -1,11 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using ExpClinicoApi.Models;
+﻿using ExpClinicoApi.Models;
+using ExpClinicoApi.Models.Global;
 using ExpClinicoApi.ViewModels;
+using ExpClinicoApi.ViewModels.Crear;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Org.BouncyCastle.Utilities.Collections;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
 
 namespace ExpClinicoApi.Controllers
 {
@@ -43,7 +47,7 @@ namespace ExpClinicoApi.Controllers
                 telefono = int.Parse(e.paciente.expediente.informacionAdicional.telefonoDomicilio),
                 estadoCivil = e.paciente.expediente.informacionAdicional.estadoCivil.estado,
                 doctor = e.historialMedico.medicoGrl.nombre,
-                tipoConsulta = e.tipoConsulta.nombreTipoConsulta,
+                idTipoConsulta = 0,
                 fecha = DateTime.Now,
                 consultaPor = "",
                 enfermedadActual = "",
@@ -60,8 +64,8 @@ namespace ExpClinicoApi.Controllers
                 descripcionReceta = "",
                 idExameneClinico = 0,
                 descripcionExamenClinico = "",
-                presionArterial = 0,
-                talla = 0,
+                presionArterial = "",
+                talla = "",
                 peso = 0,
                 temperatura = 0,
                 frecuenciaCardiaca = 0,
@@ -95,7 +99,7 @@ namespace ExpClinicoApi.Controllers
                 telefono = int.Parse(e.paciente.expediente.informacionAdicional.telefonoDomicilio),
                 estadoCivil = e.paciente.expediente.informacionAdicional.estadoCivil.estado,
                 doctor = "",
-                tipoConsulta = "",
+                idTipoConsulta = 0,
                 fecha = DateTime.Now,
                 consultaPor = "",
                 enfermedadActual = "",
@@ -112,31 +116,101 @@ namespace ExpClinicoApi.Controllers
                 descripcionReceta = "",
                 idExameneClinico = 0,
                 descripcionExamenClinico = "",
-                presionArterial = 0,
-                talla = 0,
+                presionArterial = "",
+                talla = "",
                 peso = 0,
                 temperatura = 0,
                 frecuenciaCardiaca = 0,
                 frecuenciaRespiratoria = 0,
-                idPaciente = 0,
+                idPaciente = e.paciente.idPaciente,
                 idMedicoGrl = 0
             }); ;
         }
 
-        /*Post api/Consulta/crearConsulta
+        //Post api/Consulta/Crear
         [HttpPost("[action]")]
-        public async Task<ActionResult<clsConsulta>> crearConsulta([FromBody] vmConsulta consulta)
+        public async Task<ActionResult<clsConsulta>> Crear([FromBody] vmConsulta consulta)
         {
+            
             if (!ModelState.IsValid)
             {
                 return BadRequest();
             }
 
+            clsReceta receta = new clsReceta {
+                descripcionReceta = consulta.descripcionReceta
+            };
 
+            _context.Receta.Add(receta);
+            _context.SaveChanges();
 
+            clsSignosVitales signos = new clsSignosVitales {
+                presionArterial = consulta.presionArterial,
+                talla = consulta.talla,
+                peso = consulta.peso,
+                temperatura = consulta.temperatura,
+                frecuenciaCardiaca = consulta.frecuenciaCardiaca,
+                frecuenciaRespiratoria = consulta.frecuenciaRespiratoria
+            };
 
-            return 0;
-        }*/
+            _context.SignosVitales.Add(signos);
+            _context.SaveChanges();
+
+            CrearVmHistorialMedico historia = new CrearVmHistorialMedico
+            {
+                idmedicoGrl = consulta.idMedicoGrl,
+                idReceta = receta.idReceta,
+                idSignosVitales = signos.idSignosVitales,
+                idHospital = 1,
+                idSeguro = 4,
+                dentistaFamilia = "Dra Farela",
+                consultaPor = consulta.consultaPor,
+                enfermedadActual = consulta.enfermedadActual,
+                antecedentesFamiliares = consulta.antecedentesFamiliares,
+                antecedentesPersonales = consulta.antecedentesPersonales,
+                examenesClinicos = consulta.examenesClinicos,
+                exploracionFisica = consulta.exploracionFisica,
+                diagnosticoPrincipal = consulta.diagnosticoPrincipal,
+                otroDiagnostico = consulta.otroDiagnostico,
+                tratamiento = consulta.tratamiento,
+                observaciones = consulta.observaciones,
+                idSolicitudExamen =0
+        };
+
+            _context.CrearHistorialMedico.Add(historia);
+            _context.SaveChanges();
+
+            clsConsulta consulta1 = new clsConsulta
+            {
+                idPaciente = consulta.idPaciente,
+                idHistorialMedico = historia.idHistorialMedico,
+                idTipoConsulta = consulta.idTipoConsulta,
+                fechaConsulta = consulta.fecha
+            };
+
+            _context.Consulta.Add(consulta1);
+            _context.SaveChanges();
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception)
+            {
+
+                return BadRequest(new
+                {
+                    ok = false,
+                    message = "Problemas al guardar Consulta, verifique"
+                });
+            }
+            return Ok(new
+            {
+                ok = false,
+                message = "Se ha guardado"
+            });
+
+        }
 
 
 

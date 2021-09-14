@@ -1,14 +1,17 @@
 ﻿using ExpClinicoApi.Models.Global;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace ExpClinicoApi.Models
 {
+    [Table("tblhistorialmedico")]
     public class clsHistorialMedico
     {
+        [Key]
         public int  idHistorialMedico { get; set; }
         
         [ForeignKey("idMedicoGrl")]
@@ -19,7 +22,6 @@ namespace ExpClinicoApi.Models
         public DateTime ultimaVacuna { get; set; }
         
         [ForeignKey("idHospital")]
-        
         public GlHospital hospital { get; set; }
         
         [ForeignKey("idSeguro")]
@@ -28,6 +30,8 @@ namespace ExpClinicoApi.Models
         [ForeignKey("idReceta")]
         public clsReceta receta { get; set; }
 
+        [ForeignKey("idSignosVitales")]
+        public clsSignosVitales signosVitales { get; set; }
         public String consultaPor { get; set; }
 
         public String enfermedadActual { get; set; }
@@ -50,8 +54,10 @@ namespace ExpClinicoApi.Models
 
 
         //atributos opcionales
-        public int? idMedicoGrl { get; set; }
+        public int? idmedicoGrl { get; set; }
         public int? idHospital { get; set; }
         public int? idSeguro { get; set; }
+        public int? idSignosVitales { get; set; }
+        public int? idReceta { get; set; }
     }
 }

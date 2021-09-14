@@ -158,7 +158,7 @@ namespace ExpClinicoApi.Controllers
 
             clsHistorialMedico historialMedico = new clsHistorialMedico
             {
-                idMedicoGrl=medicoGrl.idMedicoGrl,
+                idmedicoGrl=medicoGrl.idMedicoGrl,
                 dentistaFamilia=expediente.dentistaFamilia,
                 idHospital=expediente.IdHospital,
                 idSeguro=seguro.idSeguro                
