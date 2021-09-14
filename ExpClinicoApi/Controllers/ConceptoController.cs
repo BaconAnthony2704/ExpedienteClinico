@@ -103,8 +103,8 @@ namespace ExpClinicoApi.Controllers
         [HttpPost("[action]")]
         public async Task<ActionResult<clsConcepto>> Creartojson([FromBody] List<CrearConcepto> listConcepto)
         {
-            List<CrearConcepto> nuevaListaFiltrada = new List<CrearConcepto>();
-            var listaCpt =await  _context.Conceptos.ToListAsync();
+            //List<CrearConcepto> nuevaListaFiltrada = new List<CrearConcepto>();
+            //var listaCpt =await  _context.Conceptos.ToListAsync();
             if (!ModelState.IsValid)
             {
                 return BadRequest(
@@ -116,7 +116,7 @@ namespace ExpClinicoApi.Controllers
             }
             
             //Llenar la tabla concepto
-            foreach (CrearConcepto cpt in nuevaListaFiltrada)
+            foreach (CrearConcepto cpt in listConcepto)
             {
                 var c = new clsConcepto {
                     Codigo=cpt.Codigo,

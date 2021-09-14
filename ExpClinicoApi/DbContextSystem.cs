@@ -124,7 +124,7 @@ namespace ExpClinicoApi
 
                 //optionsBuilder.UseMySQL("server=remotemysql.com;user=3ExE2H1Roh;port=3306;database=3ExE2H1Roh;password='Zr6eXf4jyi';");
 
-                //optionsBuilder.UseMySQL("server=localhost;user=root;database=clinica;port=3306;password='root';");
+                //optionsBuilder.UseMySQL("server=localhost;user=root;database=clinica;port=3306;password='';");
                 //optionsBuilder.UseMySQL("server=db4free.net;user=zr6exf4jyi;port=3306;database=clinicazr6exf4jy;password='zr6exf4jyi';");
             }
         }
