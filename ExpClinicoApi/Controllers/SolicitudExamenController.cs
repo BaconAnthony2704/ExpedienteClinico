@@ -111,5 +111,49 @@ namespace ExpClinicoApi.Controllers
             });
             
         }
+
+
+        //api/SolicitudExamen/CrearExamen
+        [HttpPost("[action]")]
+        public async Task<ActionResult<clsExamen>> CrearExamen([FromBody] clsExamen examen)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(new
+                {
+                    ok = false,
+                    message = "El modelo no es valido"
+                });
+            }
+
+            //Creamos el modelo Examen
+            clsExamen exam = new clsExamen
+            {
+                nombre = examen.nombre,
+                tipoExamen = examen.tipoExamen
+            };
+
+            _context.Examenes.Add(exam);
+            _context.SaveChanges();
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception)
+            {
+                return BadRequest(new
+                {
+                    ok = false,
+                    message = "Problema al guardar examen, verifique"
+                });
+            }
+            return Ok(new
+            {
+                ok = true,
+                message = "Se ha guardado examen de forma correcta"
+            });
+
+        }
     }
 }
