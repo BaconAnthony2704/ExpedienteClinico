@@ -131,7 +131,10 @@ namespace ExpClinicoApi.Controllers
         [HttpPost("[action]")]
         public async Task<ActionResult<clsConsulta>> Crear([FromBody] vmConsulta consulta)
         {
-            
+            if (consulta.nombrePaciente == null)
+            {
+                consulta.nombrePaciente = "Bryan";
+            }
             if (!ModelState.IsValid)
             {
                 return BadRequest();

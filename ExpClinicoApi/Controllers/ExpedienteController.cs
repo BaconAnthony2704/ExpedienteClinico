@@ -21,7 +21,71 @@ namespace ExpClinicoApi.Controllers
         {
             _context = context;
         }
-        
+        //GET: api/Expediente/Obtener/1
+        [HttpGet("[action]/{idExpediente}")]
+        public async Task<vmExpediente> Obtener([FromRoute] int idExpediente)
+        {
+            var exp = await _context.Expedientes
+                .Include(e => e.informacionPersonal)
+                .Include(e => e.informacionPersonal.genero)
+                .Include(e => e.informacionAdicional)
+                .Include(e => e.informacionAdicional.estadoCivil)
+                .Include(e => e.exploracionFisica)
+                .Include(e => e.exploracionFisica.tipoPiel)
+                .Include(e => e.exploracionFisica.colorCabello)
+                .Include(e => e.historialMedico)
+                .Include(e => e.historialMedico.medicoGrl)
+                .Include(e => e.historialMedico.hospital)
+                .Include(e => e.historialMedico.seguro)
+                //.Include(e=>e.alergias)
+                //.Include(e=>e.incapacidades)
+                .FirstOrDefaultAsync(e=>e.idExpediente==idExpediente);
+
+            var vmExp = new vmExpediente {
+                titulo = exp.informacionPersonal.titulo,
+                nombrePaciente = exp.informacionPersonal.nombre,
+                apellidoPaciente = exp.informacionPersonal.apellido,
+                domicilioPaciente = exp.informacionPersonal.domicilio,
+                fechaNacimiento = exp.informacionPersonal.fechaNacimiento,
+                genero = exp.informacionPersonal.genero.tipo,
+                NoISSS = exp.informacionPersonal.NoISSS,
+                LugarNacimiento = exp.informacionAdicional.lugarNacimiento,
+                telefonoDomicilio = exp.informacionAdicional.telefonoDomicilio,
+                telefonoOficina = exp.informacionAdicional.telefonoOficina,
+                correo = exp.informacionAdicional.correo,
+                responsableA = exp.informacionAdicional.responsableA,
+                estadoCivil = exp.informacionAdicional.estadoCivil.estado,
+                nvoPaciente = exp.informacionAdicional.NvoPaciente,
+                fechaIngreso = exp.informacionAdicional.fechaIngreso,
+                altura = exp.exploracionFisica.altura,
+                peso = exp.exploracionFisica.peso,
+                tipoPiel = exp.exploracionFisica.tipoPiel.tipo,
+                marcaNaci = exp.exploracionFisica.marcaNaci,
+                imc = exp.exploracionFisica.peso / Math.Pow(exp.exploracionFisica.altura, 2),
+                colorCabello = exp.exploracionFisica.colorCabello.colorCabello,
+                ocupaLentes = exp.exploracionFisica.OcupaLentes,
+                presentaDisc = exp.exploracionFisica.PresentaDisca,
+                problemaAuditivo = exp.exploracionFisica.ProblemaAuditivo,
+                medicoGrl = exp.historialMedico.medicoGrl.nombre,
+                telefonoMedico = exp.historialMedico.medicoGrl.telefono,
+                dentistaFamilia = exp.historialMedico.dentistaFamilia,
+                direccionMedico = exp.historialMedico.medicoGrl.direccionMedico,
+                hospital = exp.historialMedico.hospital.nombre,
+                seguro = exp.historialMedico.seguro.NoPoliza,
+                ultimaVacuna = exp.historialMedico.ultimaVacuna,
+                conyugue = exp.informacionAdicional.conyugue,
+                ExpedienteNo = generarNumExpediente(),
+                poliza = exp.historialMedico.seguro.nombre,
+                alergias = obtenerAlergias(exp.idExpediente),
+                incapacidades = obtenerIncapacidades(exp.idExpediente),
+                fechaCreacion = exp.fechaCreacion,
+                idExpediente = exp.idExpediente,
+                idInformacionPersonal = exp.informacionPersonal.idInformacionPersonal,
+                isActive = exp.isActive
+            };
+            return vmExp;
+        }
+
         //GET: api/Expediente/Listar
         [HttpGet("[action]")]
         public async Task<IEnumerable<vmExpediente>> Listar()
@@ -85,7 +149,7 @@ namespace ExpClinicoApi.Controllers
                 idInformacionPersonal=exp.informacionPersonal.idInformacionPersonal,
                 isActive=exp.isActive
 
-            }).Where(e=>e.isActive==1);
+            }).Where(e=>e.isActive==1 && e.nombrePaciente!=null && e.apellidoPaciente!=null);
         }
 
         //POST: api/Expediente/Crear
