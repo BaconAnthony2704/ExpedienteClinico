@@ -81,7 +81,8 @@ namespace ExpClinicoApi.Controllers
                 fechaCreacion = exp.fechaCreacion,
                 idExpediente = exp.idExpediente,
                 idInformacionPersonal = exp.informacionPersonal.idInformacionPersonal,
-                isActive = exp.isActive
+                isActive = exp.isActive,
+                urlImagen=exp.informacionPersonal.UrlImagen
             };
             return vmExp;
         }
@@ -147,7 +148,9 @@ namespace ExpClinicoApi.Controllers
                 fechaCreacion=exp.fechaCreacion,
                 idExpediente=exp.idExpediente,
                 idInformacionPersonal=exp.informacionPersonal.idInformacionPersonal,
-                isActive=exp.isActive
+                isActive=exp.isActive,
+                urlImagen=exp.informacionPersonal.UrlImagen
+                
 
             }).Where(e=>e.isActive==1 && e.nombrePaciente!=null && e.apellidoPaciente!=null);
         }

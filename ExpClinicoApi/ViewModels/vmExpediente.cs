@@ -48,6 +48,7 @@ namespace ExpClinicoApi.ViewModels
         public List<clsIncapacidad> incapacidades { get; set; }
         public DateTime fechaCreacion { get; set; }
         public int isActive { get; set; }
+        public string urlImagen { get; set; }
 
     }
 }
