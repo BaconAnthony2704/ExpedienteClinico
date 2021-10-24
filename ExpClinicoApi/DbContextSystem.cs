@@ -53,6 +53,16 @@ namespace ExpClinicoApi
         //DbSet de componente Vue
         public DbSet<Tarjeta> Tarjetas { get; set; }
 
+        //DbSet para RRHH
+        public DbSet<clsSancion> Sancion { get; set; }
+        public DbSet<clsEmpleado> Empleado { get; set; }
+        public DbSet<clsAnticipo> Anticipo { get; set; }
+        public DbSet<clsDescuento> Descuento { get; set; }
+        public DbSet<clsPermiso> Permiso { get; set; }
+        public DbSet<clsAsistenciaLaboral> AsistenciaLaboral { get; set; }
+        public DbSet<clsCapacitacion> Capacitacion { get; set; }
+        public DbSet<clsDetalleCapacitacion> DetalleCapacitacion { get; set; }
+ 
         public string ConnectionString { get; set; }
         public DbContextSystem()
         {
@@ -99,6 +109,16 @@ namespace ExpClinicoApi
             modelBuilder.ApplyConfiguration(new RecetaMapping());
             modelBuilder.ApplyConfiguration(new ConsultaMapping());
             modelBuilder.ApplyConfiguration(new SignosVitalesMapping());
+
+            //mapping para RRHH
+            modelBuilder.ApplyConfiguration(new SancionMapping());
+            modelBuilder.ApplyConfiguration(new EmpleadoMapping());
+            modelBuilder.ApplyConfiguration(new PermisoMapping());
+            modelBuilder.ApplyConfiguration(new AsistenciaLaboralMapping());
+            modelBuilder.ApplyConfiguration(new AnticipoMapping());
+            modelBuilder.ApplyConfiguration(new DescuentoMapping());
+            modelBuilder.ApplyConfiguration(new CapacitacionMapping());
+            modelBuilder.ApplyConfiguration(new DetalleCapacitacionMapping());
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
