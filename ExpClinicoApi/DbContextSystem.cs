@@ -110,6 +110,14 @@ namespace ExpClinicoApi
             modelBuilder.ApplyConfiguration(new LoginUserMapping());
             //mapping de medicamento
             modelBuilder.ApplyConfiguration(new MedicamentoMapping());
+
+            modelBuilder.ApplyConfiguration(new RecetaMedicaMapping());
+            
+            modelBuilder.ApplyConfiguration(new TransaccionMedicamentoMapping());
+
+            
+
+
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

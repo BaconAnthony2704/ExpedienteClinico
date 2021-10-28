@@ -7,10 +7,11 @@ namespace ExpClinicoApi.Models
     public class clsRecetaMedicamento
     {
         [Key]
-        public int idRecetaMedicamento { get; set; }
+        public int idReceta { get; set; }
         public DateTime fecha { get; set; }
-        [ForeignKey("idPaciente")]
-        public int paciente { get; set; }
+        
+        //[ForeignKey("idPaciente")]
+        //public int paciente { get; set; }
 
     }
 }

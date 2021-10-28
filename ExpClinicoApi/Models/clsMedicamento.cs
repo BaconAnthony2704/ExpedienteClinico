@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -10,13 +11,15 @@ namespace ExpClinicoApi.Models
     {
 
         [Key]
-        public int idMedicamento { get; set; }
+        //[Column("IDMEDICAMENTO")]
+        public int IDMEDICAMENTO { get; set; }
         
-        public string nombre { get; set; }
-        public string tipo { get; set; }
+        public string NOMBRE { get; set; }
+        
+        public string TIPO { get; set; }
 
-        public int existencia { get; set; }
-        public string descripcion { get; set; }
+        public int EXISTENCIA { get; set; }
+        public string DESCRIPCION { get; set; }
 
     }
 }

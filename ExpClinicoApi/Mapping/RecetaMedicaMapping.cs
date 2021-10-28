@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace ExpClinicoApi.Mapping
 {
-    public class MedicamentoMapping : IEntityTypeConfiguration<clsMedicamento>
+    public class RecetaMedicaMapping : IEntityTypeConfiguration<Models.clsRecetaMedicamento>
     {
-        public void Configure(EntityTypeBuilder<clsMedicamento> builder)
+        void IEntityTypeConfiguration<clsRecetaMedicamento>.Configure(EntityTypeBuilder<clsRecetaMedicamento> builder)
         {
-            builder.ToTable("tblmedicamento").HasKey(e => e.IDMEDICAMENTO);
+            builder.ToTable("tblreceta_medica").HasKey(e => e.idReceta);
         }
     }
 }
