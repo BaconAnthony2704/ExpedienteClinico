@@ -25,13 +25,13 @@ namespace ExpClinicoApi
                 switch (line)
                 {
                     case "dev":
-                        conexion = "server=localhost;user=root;database=clinica;port=3306;password='';";
+                        conexion = "server=localhost;user=root;database=clinica;port=3306;password='root';";
                         break;
                     case "prd":
                         conexion = "server=remotemysql.com;user=3ExE2H1Roh;port=3306;database=3ExE2H1Roh;password='Zr6eXf4jyi';";
                         break;
                     case "memo":
-                        conexion= "server=localhost;user=root;database=prueba;port=3306;password='';";
+                        conexion= "server=localhost;user=root;database=prueba;port=3306;password='root';";
                         break;
 
                 }
