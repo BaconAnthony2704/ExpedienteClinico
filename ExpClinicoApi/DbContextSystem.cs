@@ -54,6 +54,16 @@ namespace ExpClinicoApi
         //DbSet de componente Vue
         public DbSet<Tarjeta> Tarjetas { get; set; }
 
+        //DbSet para RRHH
+        public DbSet<clsSancion> Sancion { get; set; }
+        public DbSet<clsEmpleado> Empleado { get; set; }
+        public DbSet<clsAnticipo> Anticipo { get; set; }
+        public DbSet<clsDescuento> Descuento { get; set; }
+        public DbSet<clsPermiso> Permiso { get; set; }
+        public DbSet<clsAsistenciaLaboral> AsistenciaLaboral { get; set; }
+        public DbSet<clsCapacitacion> Capacitacion { get; set; }
+        public DbSet<clsDetalleCapacitacion> DetalleCapacitacion { get; set; }
+ 
         public string ConnectionString { get; set; }
         //Nuevos dbset de modulo de ingreso/egreso
         public DbSet<clsConcepto> Conceptos { get; set; }
@@ -106,6 +116,7 @@ namespace ExpClinicoApi
             modelBuilder.ApplyConfiguration(new ConsultaMapping());
             modelBuilder.ApplyConfiguration(new SignosVitalesMapping());
 
+<<<<<<< HEAD
             //mapping de login
             modelBuilder.ApplyConfiguration(new LoginUserMapping());
 
@@ -113,6 +124,17 @@ namespace ExpClinicoApi
             modelBuilder.ApplyConfiguration(new ConceptoMapping());
             modelBuilder.ApplyConfiguration(new MovimientoMapping());
             modelBuilder.ApplyConfiguration(new DetalleMovimientoMapping());
+=======
+            //mapping para RRHH
+            modelBuilder.ApplyConfiguration(new SancionMapping());
+            modelBuilder.ApplyConfiguration(new EmpleadoMapping());
+            modelBuilder.ApplyConfiguration(new PermisoMapping());
+            modelBuilder.ApplyConfiguration(new AsistenciaLaboralMapping());
+            modelBuilder.ApplyConfiguration(new AnticipoMapping());
+            modelBuilder.ApplyConfiguration(new DescuentoMapping());
+            modelBuilder.ApplyConfiguration(new CapacitacionMapping());
+            modelBuilder.ApplyConfiguration(new DetalleCapacitacionMapping());
+>>>>>>> rrhh
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -120,11 +142,11 @@ namespace ExpClinicoApi
             {
 
                 
-                optionsBuilder.UseMySQL("server=sql11.freemysqlhosting.net; user =sql11439088;port=3306;database=sql11439088;password='QNNPM4AnsB';");
+                //optionsBuilder.UseMySQL("server=sql11.freemysqlhosting.net; user =sql11439088;port=3306;database=sql11439088;password='QNNPM4AnsB';");
 
-                //optionsBuilder.UseMySQL("server=localhost;user=root;database=clinica;port=3306;password='';");
+                optionsBuilder.UseMySQL("server=localhost;user=root;database=clinica;port=3306;password='root';");
                 
             }
         }
     }
-}
+} 
