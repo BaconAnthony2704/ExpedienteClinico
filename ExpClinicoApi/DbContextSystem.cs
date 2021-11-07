@@ -59,7 +59,7 @@ namespace ExpClinicoApi
         public DbSet<clsConcepto> Conceptos { get; set; }
         public DbSet<clsMovimiento> Movimientos { get; set; }
         public DbSet<clsDetalleMovimiento> DetalleMovimientos { get; set; }
-
+        public DbSet<clsMedicamento> Medicamento { get; set; }
         public DbContextSystem()
         {
            
@@ -120,9 +120,9 @@ namespace ExpClinicoApi
             {
 
                 
-                optionsBuilder.UseMySQL("server=sql11.freemysqlhosting.net; user =sql11439088;port=3306;database=sql11439088;password='QNNPM4AnsB';");
+                //optionsBuilder.UseMySQL("server=sql11.freemysqlhosting.net; user =sql11439088;port=3306;database=sql11439088;password='QNNPM4AnsB';");
 
-                //optionsBuilder.UseMySQL("server=localhost;user=root;database=clinica;port=3306;password='';");
+                optionsBuilder.UseMySQL("server=localhost;user=root;database=clinica;port=3306;password='';");
                 
             }
         }
