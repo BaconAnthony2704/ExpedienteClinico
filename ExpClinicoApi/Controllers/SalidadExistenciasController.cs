@@ -53,7 +53,7 @@ namespace ExpClinicoApi.Controllers
           */
 
         [HttpPost]
-        public async Task<ActionResult<Models.clsTransacionMedicamento>> Post([FromBody] List<clsTransacionMedicamento> listaMedicamento)
+        public async Task<ActionResult<Models.clsTransacionMedicamento>> Post([FromBody] List<ViewModels.vmInventario> listaMedicamento)
         {
             if (!ModelState.IsValid)
             {
@@ -64,6 +64,8 @@ namespace ExpClinicoApi.Controllers
             // 1 - crear el objeto recetaMedicamento(la receta lleva el id del paciente)
             clsRecetaMedicamento receta = new clsRecetaMedicamento();
             receta.fecha = fecha;
+            receta.paciente = listaMedicamento[0].paciente;
+            
             //receta.idReceta = 1;
             //receta = 1;
             

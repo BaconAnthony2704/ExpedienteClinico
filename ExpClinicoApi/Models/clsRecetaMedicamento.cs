@@ -9,7 +9,8 @@ namespace ExpClinicoApi.Models
         [Key]
         public int idReceta { get; set; }
         public DateTime fecha { get; set; }
-        
+        public string paciente { get; set; }
+
         //[ForeignKey("idPaciente")]
         //public int paciente { get; set; }
 

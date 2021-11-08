@@ -21,5 +21,7 @@ namespace ExpClinicoApi.Models
         public int idMedicamento { get; set; }
         public int tipo_transaccion { get; set; }   //1- entrada , 2-salidad
         public int cantidad { get; set; }
+
+       // public string paciente { get; set; }
     }
 }
