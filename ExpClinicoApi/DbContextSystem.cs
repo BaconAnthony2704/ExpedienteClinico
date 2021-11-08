@@ -51,6 +51,13 @@ namespace ExpClinicoApi
         public DbSet<ViewModels.Crear.CrearVmHistorialMedico> CrearHistorialMedico { get; set; }
         public DbSet<ViewModels.Crear.CrearVmConsulta> CrearConsulta { get; set; }
 
+        //dbset para inventario
+        public DbSet<clsMedicamento> Medicamento { get; set; }
+        public DbSet<clsRecetaMedicamento> RecetaMedicamento { get; set; }
+        public DbSet<clsTransacionMedicamento> TransacionMedicamento { get; set; }
+        public DbSet<clsFechaVencimiento> FechaVencimiento { get; set; }
+
+
         //DbSet de componente Vue
         public DbSet<Tarjeta> Tarjetas { get; set; }
 
@@ -119,6 +126,7 @@ namespace ExpClinicoApi
 <<<<<<< HEAD
             //mapping de login
             modelBuilder.ApplyConfiguration(new LoginUserMapping());
+<<<<<<< HEAD
 
             //mapping de modulo de ingreso/egreso
             modelBuilder.ApplyConfiguration(new ConceptoMapping());
@@ -135,6 +143,18 @@ namespace ExpClinicoApi
             modelBuilder.ApplyConfiguration(new CapacitacionMapping());
             modelBuilder.ApplyConfiguration(new DetalleCapacitacionMapping());
 >>>>>>> rrhh
+=======
+            //mapping de medicamento
+            modelBuilder.ApplyConfiguration(new MedicamentoMapping());
+
+            modelBuilder.ApplyConfiguration(new RecetaMedicaMapping());
+            
+            modelBuilder.ApplyConfiguration(new TransaccionMedicamentoMapping());
+
+            
+
+
+>>>>>>> 79125a274273f670c89436547375a9204f0e02d9
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -144,8 +164,13 @@ namespace ExpClinicoApi
                 
                 //optionsBuilder.UseMySQL("server=sql11.freemysqlhosting.net; user =sql11439088;port=3306;database=sql11439088;password='QNNPM4AnsB';");
 
+<<<<<<< HEAD
                 optionsBuilder.UseMySQL("server=localhost;user=root;database=clinica;port=3306;password='root';");
                 
+=======
+                optionsBuilder.UseMySQL("server=localhost;user=root;database=clinica;port=3306;password='';");
+                //optionsBuilder.UseMySQL("server=db4free.net;user=zr6exf4jyi;port=3306;database=clinicazr6exf4jy;password='zr6exf4jyi';");
+>>>>>>> 79125a274273f670c89436547375a9204f0e02d9
             }
         }
     }
