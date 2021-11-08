@@ -123,16 +123,16 @@ namespace ExpClinicoApi
             modelBuilder.ApplyConfiguration(new ConsultaMapping());
             modelBuilder.ApplyConfiguration(new SignosVitalesMapping());
 
-<<<<<<< HEAD
+
             //mapping de login
             modelBuilder.ApplyConfiguration(new LoginUserMapping());
-<<<<<<< HEAD
+
 
             //mapping de modulo de ingreso/egreso
             modelBuilder.ApplyConfiguration(new ConceptoMapping());
             modelBuilder.ApplyConfiguration(new MovimientoMapping());
             modelBuilder.ApplyConfiguration(new DetalleMovimientoMapping());
-=======
+
             //mapping para RRHH
             modelBuilder.ApplyConfiguration(new SancionMapping());
             modelBuilder.ApplyConfiguration(new EmpleadoMapping());
@@ -142,8 +142,7 @@ namespace ExpClinicoApi
             modelBuilder.ApplyConfiguration(new DescuentoMapping());
             modelBuilder.ApplyConfiguration(new CapacitacionMapping());
             modelBuilder.ApplyConfiguration(new DetalleCapacitacionMapping());
->>>>>>> rrhh
-=======
+
             //mapping de medicamento
             modelBuilder.ApplyConfiguration(new MedicamentoMapping());
 
@@ -154,7 +153,6 @@ namespace ExpClinicoApi
             
 
 
->>>>>>> 79125a274273f670c89436547375a9204f0e02d9
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -164,13 +162,12 @@ namespace ExpClinicoApi
                 
                 //optionsBuilder.UseMySQL("server=sql11.freemysqlhosting.net; user =sql11439088;port=3306;database=sql11439088;password='QNNPM4AnsB';");
 
-<<<<<<< HEAD
-                optionsBuilder.UseMySQL("server=localhost;user=root;database=clinica;port=3306;password='root';");
+                //optionsBuilder.UseMySQL("server=localhost;user=root;database=clinica;port=3306;password='root';");
                 
-=======
+
                 optionsBuilder.UseMySQL("server=localhost;user=root;database=clinica;port=3306;password='';");
                 //optionsBuilder.UseMySQL("server=db4free.net;user=zr6exf4jyi;port=3306;database=clinicazr6exf4jy;password='zr6exf4jyi';");
->>>>>>> 79125a274273f670c89436547375a9204f0e02d9
+
             }
         }
     }
