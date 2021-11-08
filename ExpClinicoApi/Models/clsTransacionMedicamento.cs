@@ -10,13 +10,18 @@ namespace ExpClinicoApi.Models
     public class clsTransacionMedicamento
     {
         [Key]
-        public int id { get; set; }
-        [ForeignKey("codigo")]
-        public clsMedicamento idMedicamento { get; set; }
+        public int idTransaccionMedicamento { get; set; }
+        [ForeignKey("idMedicamento")]
+        public clsMedicamento Medicamento { get; set; }
         
-        [ForeignKey("idRecetaMedicamento")]
-        public clsRecetaMedicamento idReceta{ get; set; }
-    public int tipoTransaccion { get; set; }   //1- entrada , 2-salidad
+        [ForeignKey("idReceta")]
+        public clsRecetaMedicamento Receta{ get; set; }
+
+        public int idReceta { get; set; }
+        public int idMedicamento { get; set; }
+        public int tipo_transaccion { get; set; }   //1- entrada , 2-salidad
         public int cantidad { get; set; }
+
+       // public string paciente { get; set; }
     }
 }

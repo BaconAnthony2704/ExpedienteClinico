@@ -59,7 +59,7 @@ namespace ExpClinicoApi.Controllers
         public async Task<IActionResult> Put(int id, [FromBody] Models.clsMedicamento medicamento)
         {
             
-                if (id != medicamento.idMedicamento)
+                if (id != medicamento.IDMEDICAMENTO)
                 {
                     return BadRequest();
                 }
