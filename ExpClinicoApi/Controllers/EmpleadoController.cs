@@ -1039,7 +1039,7 @@ namespace ExpClinicoApi.Controllers
 
             _context.Planilla.Add(plan2);
 
-            clsMovimiento movimiento = new clsMovimiento
+            /*clsMovimiento movimiento = new clsMovimiento
             {
                 IdConcepto = 5102001,
                 Documento = "",
@@ -1051,7 +1051,7 @@ namespace ExpClinicoApi.Controllers
                 Modified = DateTime.Now
             };
             _context.Movimientos.Add(movimiento);
-            _context.SaveChanges();
+            _context.SaveChanges();*/
 
             try
             {
@@ -1102,6 +1102,218 @@ namespace ExpClinicoApi.Controllers
                 message = "Planilla Cerrada Correctamente correctamente"
             });
         }
+
+
+
+
+
+        /*Web Service
+         * para
+         * Capacitacion
+         */
+        //Get api/Empleado/ListarCapacitacion
+        [HttpGet("[action]")]
+        public async Task<ActionResult<IEnumerable<clsCapacitacion>>> ListarCapacitacion()
+        {
+            
+            
+            return await _context.Capacitacion.ToListAsync();
+        }
+        //Post api/Empleado/CrearCapacitacion
+        [HttpPost("[action]")]
+        public async Task<ActionResult<clsCapacitacion>> CrearCapacitacion([FromBody] clsCapacitacion capacitacion)
+        {
+            if (!ModelState.IsValid)
+            {
+                return Ok(
+                new
+                {
+                    ok = false,
+                    message = "Capacitacion no Encontrado"
+                });
+            }
+
+            clsCapacitacion cap = new clsCapacitacion
+            {
+                descripcion = capacitacion.descripcion,
+                monto = capacitacion.monto,
+                fecha = capacitacion.fecha,
+
+            };
+
+            _context.Capacitacion.Add(cap);
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception)
+            {
+
+                return BadRequest(new
+                {
+                    ok = false,
+                    message = "Problemas al guardar Capacitacion, verifique"
+                });
+            }
+            return Ok(new
+            {
+                ok = true,
+                message = "Se ha guardado"
+            });
+
+        }
+        //Post api/Empleado/editarCapacitacion
+        [HttpPut("[action]")]
+        public async Task<ActionResult<clsCapacitacion>> editarCapacitacion([FromBody] clsCapacitacion capacitacion)
+        {
+            if (!ModelState.IsValid)
+            {
+                return Ok(new
+                {
+                    ok = false,
+                    message = "Capacitacion no Encontrado"
+                });
+            }
+
+            _context.Entry(capacitacion).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+
+                return BadRequest(new
+                {
+                    ok = false,
+                    message = "Capacitacion no Encontrado"
+                });
+            }
+            return Ok(new
+            {
+                ok = true,
+                message = "Se Edito correctamente"
+            });
+
+        }
+        // DELETE: api/Empleado/deleteCapacitacion
+        [HttpPost("[action]")]
+        public async Task<ActionResult<clsCapacitacion>> deleteCapacitacion(clsCapacitacion capacitacion)
+        {
+            var cap = await _context.Capacitacion.FindAsync(capacitacion.idCapacitacion);
+            if (cap == null)
+            {
+                return Ok(
+                new
+                {
+                    ok = false,
+                    message = "Capacitacion No encontrado"
+                });
+            }
+
+            _context.Capacitacion.Remove(cap);
+            await _context.SaveChangesAsync();
+
+            return Ok(
+                new
+                {
+                    ok = true,
+                    message = "capcitacion Eliminado Correctamente"
+                });
+        }
+
+
+
+
+
+        /*Web Service
+         * para
+         * Capacitacion
+         */
+        //Get api/Empleado/ListarDetalleCapacitacion
+        [HttpPost("[action]")]
+        public async Task<ActionResult<IEnumerable<clsDetalleCapacitacion>>> ListarDetalleCapacitacion(clsCapacitacion capacitacion)
+        {
+            var respuestas = await _context.DetalleCapacitacion.Where(c => c.idCapacitacion == capacitacion.idCapacitacion)
+                            .Include(e=>e.empleado)
+                            .Include(d=>d.capacitacion)
+                            .ToListAsync();
+
+            return respuestas;
+        }
+        //Post api/Empleado/CrearDetalleCapacitacion
+        [HttpPost("[action]")]
+        public async Task<ActionResult<clsCapacitacion>> CrearDetalleCapacitacion([FromBody] clsDetalleCapacitacion capacitacion)
+        {
+            if (!ModelState.IsValid)
+            {
+                return Ok(
+                new
+                {
+                    ok = false,
+                    message = "Capacitacion no Encontrado"
+                });
+            }
+
+            clsDetalleCapacitacion cap = new clsDetalleCapacitacion
+            {
+                idCapacitacion = capacitacion.idCapacitacion,
+                idEmpleado = capacitacion.idEmpleado,
+            };
+
+            _context.DetalleCapacitacion.Add(cap);
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception)
+            {
+
+                return BadRequest(new
+                {
+                    ok = false,
+                    message = "Problemas al guardar Capacitacion, verifique"
+                });
+            }
+            return Ok(new
+            {
+                ok = true,
+                message = "Se ha guardado"
+            });
+
+        }
+        // DELETE: api/Empleado/deleteDetalleCapacitacion
+        [HttpPost("[action]")]
+        public async Task<ActionResult<clsDetalleCapacitacion>> deleteDetalleCapacitacion(clsDetalleCapacitacion capacitacion)
+        {
+            var cap = await _context.DetalleCapacitacion.FindAsync(capacitacion.idDetalleCapacitacion);
+            if (cap == null)
+            {
+                return Ok(
+                new
+                {
+                    ok = false,
+                    message = "Capacitacion No encontrado"
+                });
+            }
+
+            _context.DetalleCapacitacion.Remove(cap);
+            await _context.SaveChangesAsync();
+
+            return Ok(
+                new
+                {
+                    ok = true,
+                    message = "capcitacion Eliminado Correctamente"
+                });
+        }
+
+
+
+
 
 
         public IActionResult Index()
