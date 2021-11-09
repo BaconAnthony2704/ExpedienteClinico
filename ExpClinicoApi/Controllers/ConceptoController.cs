@@ -141,7 +141,7 @@ namespace ExpClinicoApi.Controllers
                     }
                 );
             }
-            catch (Exception)
+            catch (Exception e)
             {
 
                 return BadRequest(new { ok = false, msg = "Problemas en la insersion" });
