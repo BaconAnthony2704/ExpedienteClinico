@@ -63,7 +63,9 @@ namespace ExpClinicoApi
         public DbSet<clsAsistenciaLaboral> AsistenciaLaboral { get; set; }
         public DbSet<clsCapacitacion> Capacitacion { get; set; }
         public DbSet<clsDetalleCapacitacion> DetalleCapacitacion { get; set; }
- 
+        public DbSet<clsDetallePlanilla> DetallePlanilla { get; set; }
+        public DbSet<clsPlanilla> Planilla { get; set; }
+
         public string ConnectionString { get; set; }
         //Nuevos dbset de modulo de ingreso/egreso
         public DbSet<clsConcepto> Conceptos { get; set; }
@@ -116,7 +118,6 @@ namespace ExpClinicoApi
             modelBuilder.ApplyConfiguration(new ConsultaMapping());
             modelBuilder.ApplyConfiguration(new SignosVitalesMapping());
 
-<<<<<<< HEAD
             //mapping de login
             modelBuilder.ApplyConfiguration(new LoginUserMapping());
 
@@ -124,7 +125,7 @@ namespace ExpClinicoApi
             modelBuilder.ApplyConfiguration(new ConceptoMapping());
             modelBuilder.ApplyConfiguration(new MovimientoMapping());
             modelBuilder.ApplyConfiguration(new DetalleMovimientoMapping());
-=======
+
             //mapping para RRHH
             modelBuilder.ApplyConfiguration(new SancionMapping());
             modelBuilder.ApplyConfiguration(new EmpleadoMapping());
@@ -134,7 +135,9 @@ namespace ExpClinicoApi
             modelBuilder.ApplyConfiguration(new DescuentoMapping());
             modelBuilder.ApplyConfiguration(new CapacitacionMapping());
             modelBuilder.ApplyConfiguration(new DetalleCapacitacionMapping());
->>>>>>> rrhh
+            modelBuilder.ApplyConfiguration(new DetallePlanillaMapping());
+            modelBuilder.ApplyConfiguration(new PlanillaMapping());
+
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

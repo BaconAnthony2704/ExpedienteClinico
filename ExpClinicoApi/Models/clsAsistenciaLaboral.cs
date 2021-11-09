@@ -17,8 +17,11 @@ namespace ExpClinicoApi.Models
         public DateTime fecha { get; set; }
         [ForeignKey("idPermiso")]
         public clsPermiso permiso { get; set; }
+        [ForeignKey("idEmpleado")]
+        public clsEmpleado empleado { get; set; }
 
         //otros atributos
         public int? idPermiso { get; set; }
+        public int? idEmpleado { get; set; }
     }
 }
