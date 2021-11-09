@@ -66,7 +66,7 @@ namespace ExpClinicoApi.Controllers
                 tr.idReceta = 1;
                 tr.idMedicamento = item.idMedicamento;
                 tr.cantidad = item.cantidad;
-                tr.tipo_transaccion = 2;  //2 es salida y 1 es entrada
+                tr.tipo_transaccion = "Entrada";  //2 es salida y 1 es entrada
 
 
                 var medicamento = _context.Medicamento.Where(m => m.IDMEDICAMENTO == tr.idMedicamento).FirstOrDefault();

@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
+using Microsoft.EntityFrameworkCore;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -83,7 +83,7 @@ namespace ExpClinicoApi.Controllers
                 tr.idReceta = receta.idReceta;
                 tr.idMedicamento = item.idMedicamento;
                 tr.cantidad = item.cantidad;
-                tr.tipo_transaccion = 1;
+                tr.tipo_transaccion = "salida";
 
 
                 var medicamento = _context.Medicamento.Where(m => m.IDMEDICAMENTO == tr.idMedicamento).FirstOrDefault();
@@ -122,5 +122,13 @@ namespace ExpClinicoApi.Controllers
         public void Delete(int id)
         {
         }
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<clsTransacionMedicamento>>> Kardex()
+        {
+
+            return await _context.TransacionMedicamento.Include(x=>x.Medicamento).Include(x=>x.Receta).ToListAsync();
+
+        }
+
     }
 }

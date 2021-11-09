@@ -24,22 +24,12 @@ namespace ExpClinicoApi.Controllers
         
         // GET: api/<MedicamentosController>
         [HttpGet]
-        public async Task<IEnumerable<ExistenciaViewModel>> Get()
+        public async Task<IEnumerable<Models.clsMedicamento>> Get()
         {
 
-            //return await _context.Medicamento.ToListAsync();
-            var res = await _context.Medicamento.ToListAsync();
-            return res.Select(e => new ExistenciaViewModel
-            {
-                DESCRIPCION=e.DESCRIPCION,
-                ESTADO=(e.IDMEDICAMENTO==1)?"Entrada":"Salida",
-                TIPO=e.TIPO,
-                EXISTENCIA=e.EXISTENCIA,
-                NOMBRE=e.NOMBRE,
-                IDMEDICAMENTO=e.IDMEDICAMENTO
-            });
-
+            return await _context.Medicamento.ToListAsync();
         }
+
 
         // GET api/<MedicamentosController>/5
         [HttpGet("{id}")]

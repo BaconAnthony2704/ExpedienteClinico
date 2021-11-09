@@ -13,7 +13,7 @@ namespace ExpClinicoApi.ViewModels
 
         public string TIPO { get; set; }
 
-        public int EXISTENCIA { get; set; }
+        public string EXISTENCIA { get; set; }
         public string DESCRIPCION { get; set; }
         public string ESTADO { get; set; }
     }
