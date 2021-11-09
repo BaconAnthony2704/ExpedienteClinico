@@ -65,10 +65,10 @@ namespace ExpClinicoApi.Controllers
             clsRecetaMedicamento receta = new clsRecetaMedicamento();
             receta.fecha = fecha;
             receta.paciente = listaMedicamento[0].paciente;
-            
+
             //receta.idReceta = 1;
             //receta = 1;
-            
+
 
             //receta.idReceta = 1090;
 
@@ -88,20 +88,21 @@ namespace ExpClinicoApi.Controllers
 
                 var medicamento = _context.Medicamento.Where(m => m.IDMEDICAMENTO == tr.idMedicamento).FirstOrDefault();
                 var existencia_medicamento = medicamento.EXISTENCIA;
-                
+
                 //actualizamos la existencia
                 var nueva_Existencia = existencia_medicamento - tr.cantidad;
 
                 medicamento.EXISTENCIA = nueva_Existencia;
                 _context.Medicamento.Update(medicamento);
 
-                 //_context.Medicamento.Add(medicamento_update);
+                //_context.Medicamento.Add(medicamento_update);
                 //_context.SaveChanges();
                 await _context.TransacionMedicamento.AddAsync(tr);
                 await _context.SaveChangesAsync();
-                
-                
+
+
             }
+
             return Ok(new
             {
                 ok = true,

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using ExpClinicoApi.ViewModels;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -23,10 +24,21 @@ namespace ExpClinicoApi.Controllers
         
         // GET: api/<MedicamentosController>
         [HttpGet]
-        public async Task<IEnumerable<Models.clsMedicamento>> Get()
+        public async Task<IEnumerable<ExistenciaViewModel>> Get()
         {
-            
-            return await _context.Medicamento.ToListAsync();
+
+            //return await _context.Medicamento.ToListAsync();
+            var res = await _context.Medicamento.ToListAsync();
+            return res.Select(e => new ExistenciaViewModel
+            {
+                DESCRIPCION=e.DESCRIPCION,
+                ESTADO=(e.IDMEDICAMENTO==1)?"Entrada":"Salida",
+                TIPO=e.TIPO,
+                EXISTENCIA=e.EXISTENCIA,
+                NOMBRE=e.NOMBRE,
+                IDMEDICAMENTO=e.IDMEDICAMENTO
+            });
+
         }
 
         // GET api/<MedicamentosController>/5

@@ -209,7 +209,7 @@ namespace ExpClinicoApi.Controllers
             }
             return Ok(new
             {
-                ok = false,
+                ok = true,
                 message = "Se ha guardado"
             });
 
