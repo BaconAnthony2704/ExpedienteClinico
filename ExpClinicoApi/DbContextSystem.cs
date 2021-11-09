@@ -61,7 +61,6 @@ namespace ExpClinicoApi
         //DbSet de componente Vue
         public DbSet<Tarjeta> Tarjetas { get; set; }
 
-<<<<<<< HEAD
         //DbSet para RRHH
         public DbSet<clsSancion> Sancion { get; set; }
         public DbSet<clsEmpleado> Empleado { get; set; }
@@ -74,20 +73,11 @@ namespace ExpClinicoApi
         public DbSet<clsDetallePlanilla> DetallePlanilla { get; set; }
         public DbSet<clsPlanilla> Planilla { get; set; }
 
-=======
->>>>>>> d1d4f1d4a801c053c1e880f9019a7c043a717514
         public string ConnectionString { get; set; }
         //Nuevos dbset de modulo de ingreso/egreso
         public DbSet<clsConcepto> Conceptos { get; set; }
         public DbSet<clsMovimiento> Movimientos { get; set; }
         public DbSet<clsDetalleMovimiento> DetalleMovimientos { get; set; }
-
-        public DbSet<clsSancion> Sancion { get; set; }
-        public DbSet<clsDescuento> Descuento { get; set; }
-        public DbSet<clsAnticipo> Anticipo { get; set; }
-        public DbSet<clsPermiso> Permiso { get; set; }
-        public DbSet<clsAsistenciaLaboral> AsistenciaLaboral { get; set; }
-        public DbSet<clsEmpleado> Empleado { get; set; }
 
         public DbContextSystem()
         {
@@ -144,7 +134,6 @@ namespace ExpClinicoApi
             modelBuilder.ApplyConfiguration(new MovimientoMapping());
             modelBuilder.ApplyConfiguration(new DetalleMovimientoMapping());
 
-<<<<<<< HEAD
             //mapping para RRHH
             modelBuilder.ApplyConfiguration(new SancionMapping());
             modelBuilder.ApplyConfiguration(new EmpleadoMapping());
@@ -156,17 +145,6 @@ namespace ExpClinicoApi
             modelBuilder.ApplyConfiguration(new DetalleCapacitacionMapping());
             modelBuilder.ApplyConfiguration(new DetallePlanillaMapping());
             modelBuilder.ApplyConfiguration(new PlanillaMapping());
-=======
-            //mapping de medicamento
-            modelBuilder.ApplyConfiguration(new MedicamentoMapping());
-
-            modelBuilder.ApplyConfiguration(new RecetaMedicaMapping());
-            
-            modelBuilder.ApplyConfiguration(new TransaccionMedicamentoMapping());
-
-            
-
->>>>>>> d1d4f1d4a801c053c1e880f9019a7c043a717514
 
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
